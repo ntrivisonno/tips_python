@@ -367,6 +367,34 @@ plt.show()
      ax[1].set_title('Ca vs Mach')
      
      plt.show()
+**** cortito y al pie
+     plt.subplot(121)
+***** ej
+     import numpy as np
+     import matplotlib.pyplot as plt
+     
+     M_eg = [0.1,  0.6,  0.8,  0.9,  0.95, 1.,   1.05, 1.1,  1.2,  1.35, 1.5,  1.75, 2.  ]
+     Ca_eg= [0.144, 0.144, 0.146, 0.167, 0.221, 0.327, 0.383, 0.381, 0.37,  0.353, 0.338, 0.314,
+     0.294]
+     M_ba = [0.01,  0.4,   0.6,   0.7,   0.8,   0.9,   0.95,  0.975, 1.,    1.025, 1.05,  1.1,
+     1.2,   1.5,   2.,    2.5,   3.   ]
+     Ca_ba = [0.144, 0.144, 0.144, 0.144, 0.146, 0.16,  0.202, 0.24,  0.284, 0.313, 0.332, 0.337,
+     0.34,  0.321, 0.276, 0.24,  0.214]
+
+
+     #--------------------------------------------
+     # Plots
+     plt.subplot(121)
+     plt.plot(M_eg, Ca_eg,'o-b', label='Ca Egip')
+     plt.grid()
+     plt.legend()
+
+     plt.subplot(122)
+     plt.plot(M_ba, Ca_ba,'*-r', label='Cd Baran')
+     plt.grid()
+     plt.legend()
+
+     plt.show()
 *** plot con legends avanzado
     https://matplotlib.org/stable/gallery/text_labels_and_annotations/tex_demo.html#sphx-glr-gallery-text-labels-and-annotations-tex-demo-py
 **** Ej, indentar a la hora de usar en .py
@@ -522,12 +550,27 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
    a,b = b,a
 ** tupla
    # tupla != lista
-   # tupla, tipos de datos no homogeneos
+   # tupla, arreglos de datos no homogeneos
    a = (1,2,1+j,'5')
    
 *** verificar si esta dentro
     1+j in a
    
+*** zip, mershear dos tuplas
+    la funcion zip, retorna un objeto zip, que es un iterador de tuplas
+    donde los primeros valores de cada tupla se pasan juntos, y asi
+    sucesivamente
+**** ej
+     a1 = ("John", "Charles", "Mike", "Nico")
+     a = ("John", "Charles", "Mike")
+     b = ("1", "Christy", "Monica","pp")
+
+     x = zip(a, b)
+     x1 = zip(a1, b)
+     #use the tuple() function to display a readable version of the result:
+
+     print(tuple(x))
+     print(tuple(x1))
 ** varios
 *** agregar
 * otro
