@@ -1,4 +1,16 @@
 * functions
+** encabezado
+*** begin prog
+   """
+   %@author: ntrivisonno
+   
+   script for bifurcation diagram or logistic map
+   """
+*** end prog
+   print('#--------------------------------------------')
+   print('\n FIN, OK!')
+
+   plt.show()
 ** assert
    excepciones, se usa para evitar que el prog se interrumpa frente 
    a un error
@@ -148,7 +160,18 @@
     print("euler.__doc__")
     print(euler.__doc__) #show docstring of the function,method or attribute
 ** data
+**** objeto
+     f = open(filename, mode)
+     ‘r’, este es el modo predeterminado, que abre un archivo para leer
+     ‘w’, este modo abre un archivo para escritura, si el archivo no existe, crea un nuevo archivo.
+     ‘a’, abre un archivo en modo anexar, agrega datos al final del archivo. Si el archivo no existe, crea un nuevo archivo.
+     ‘b’, abre un archivo en modo binario.
+     ‘r +’, abre un archivo (no crear) para leer y escribir.
+     ‘w +’, abre o crea un archivo para escribir y leer, descarta el contenido existente.
+     ‘a +’, abre o crea un archivo para leer y escribir, y agrega datos al final del archivo.
 *** leer data
+**** numpy
+    # example by lucas
     # nos creamos un vector de casos para acceder a disintos simulaciones
     CASO = 0
     data = np.loadtxt('Resu_RBD/' + ['Forces_proc_C_C01.txt', 'Forces_proc_C_C02.txt', 'Forces_proc_C_C03.txt'][CASO], delimiter=',', skiprows=1)
@@ -160,7 +183,33 @@
     delta2 = data[:, 3]  # alpha2
     vt = data[:, 4]
     u = data[:, 5]  # vel_body_X
+**** objeto
+***** example
+      f = open('./test.txt', 'r')
+      content = f.read()
+      f.close()
+      print(content)
+*** escribir data
+**** numpy
+      np.savetxt('nombre_archivo', objeto_guardar, formato_salida, encabezado)
+      formato_salida: %.2f -> flotantes con dos decimales
+***** example
+      import numpy as np
+      arr = np.array([[1.20, 2.20, 3.00], [4.14, 5.65, 6.42]])
+      np.savetxt('my_arr.txt', arr, fmt='%.2f', header = 'Col1 Col2 Col3')
+**** archivo    
+***** example
+      #Escribimos un poco
+      f = open('test.txt', 'w')
+      for i in range(5):
+         f.write(f"Linea numero {i}\n")
+    
+      f.close()
 
+**** agragar linea al txt
+     f = open('test.txt', 'a')
+     f.write(f"Agrego una linea mas\n")
+     f.close()
 ** dhf5
 *** read 
     import h5py
@@ -480,7 +529,8 @@ plt.show()
     print('Fin! Prog OK\n')
 *** avanzado
     #ver estimacion.py en ~/Documents/CIMEC/Tesis/estimacion/
-    print(("%3d: %s" % (k, sol["status"])))
+    print(("%3f: %s" % (k, sol["status"]))) # float
+    print(("%3d: %s" % (k, sol["status"]))) # entero
 ** underscore "_"
 https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscore%20prefix%20is%20meant,public%E2%80%9D%20variables%20like%20Java%20does.
 *** Single Trailing Underscore: var_  -> evitar conflicto nombres
