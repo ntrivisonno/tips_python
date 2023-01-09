@@ -122,6 +122,8 @@
     tta = np.asarray(tt) # transformamos lista a array
     print('type(tta)')
     print(type(tta))
+*** warning/error of array with different length
+    see warnings section at the end of the file
 ** append
    metodo de una clase que agrega algo (num,lista, etc) a algo ya existente
 *** ej
@@ -250,6 +252,8 @@
    a is c
    ## false
    
+** =
+   ojo con el igual, que hace que apunte al mismo lugar de direcci'on??? check!
 ** lambda function
    es una funcion para crear una funcion inline o para hacer una funcion de forma recursiva
 *** ej:
@@ -268,11 +272,95 @@
 
     print(suma(2,4))
 ** list
+   es una estructura definida [], que tiene una gran cantidad de métodos asociados
    # lista != tupla
    a = [(1,2,1+j,'5')]
    for i in a:
        print(i)
-
+*** métodos listas
+**** append(x)
+     le incorpora un elemento a lo último
+     a = [(1,2,1+j,'5')]
+     a.append(5)
+     print(a)
+**** extend
+     sería un append pero se le incorpora un iterador (vector, lista, etc)
+     a = [(1,2,1+j,'5')]
+     a.extend(range(5))
+     print(a)
+**** insert(i,x)
+     # se inserta un valor en la posicion i
+     a = [1,2,1+2,'5']
+     a.insert(1,1.5) # insertamos un valor intermedio
+     print(a)
+**** remove(x)
+     #Remove the first item from the list whose value is equal to x. It raises a ValueError if there is no such item
+     a = [1,2,1+2,'5']
+     b = list(a)
+     b.remove(2)
+     print(a)
+** file
+   file handling
+   pythong has several methods (functions) for handling files
+*** create
+    to create a file, should use the 'open' method with:
+    - 'x' -> create, runs ERRORS if doesn't exist
+    - 'w' -> write, open a files for writing, creates the files is 
+    doesn't exist
+    - 'a' -> append, apendding, creates a file if doesn't exist   
+*** open
+    open(name_file, method)
+    there are several methods for opening files: x, w, r, a, t, b
+    - 'r' -> read, DEFAULT VALUE, opens a file for reading, ERROR if 
+    doesn't exits
+    - 'x' -> create, runs ERRORS if doesn't exist
+    - 'w' -> write, open a files for writing, creates the files is 
+    doesn't exist
+    - 'a' -> append, apendding, creates a file if doesn't exist
+    additionally, can specify the type:
+    - 't' -> text, DEFAULT
+    - 'b' -> binary (eg, pictures)
+*** write
+    use the open() method
+**** new file
+    open()
+    - 'x' -> create, runs ERRORS if doesn't exist
+    - 'w' -> write, open a files for writing, creates the files is 
+    doesn't exist
+    - 'a' -> append, apendding, creates a file if doesn't exist
+**** existing file
+     open()
+    - 'w' -> write, open a files for writing, creates the files is 
+    doesn't exist
+    - 'a' -> append, apendding, creates a file if doesn't exist   
+*** reading
+    use open() method, with 'r', DEFAULT value, ERROR if doesn't
+    exist
+**** example
+    f = open('myfile.txt', 'r')
+    data = f.read()
+    print(data)
+    f.close()
+*** example
+**** open, write
+    f = open('myfile.txt','x') # x -> create
+    data = 'Hello world'
+    f.write(data)
+    f.close()
+**** writing vector
+     data = [1.6, 3.4, 6.2]
+     f = open('mytext.txt', 'x')
+     for _i in data:
+          record = str(value)
+	  f.write(record)
+	  f.write('\n') #new line
+     f.close()
+**** replace
+     f = open('mytext.txt', 'r')
+     for _i in f:
+          record = record.replace('\n', ' ')
+	  print(record)
+     f.close()
 ** for
 *** directo
    el bucle for establece una variable iteradora en cada valor de la lista.
@@ -623,6 +711,21 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
      print(tuple(x1))
 ** varios
 *** agregar
+** warnings
+*** error np.arrays length
+    when facing with arrays with different length, there would be an error. To Face
+    it you can avoid the warning and use list in stead of arrays, or handle the array
+    as an object
+**** avoid warning
+     import warnings
+     warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning) 
+**** handle the array as object
+     You can add dtype = object when you create your numpy array as:
+
+     numpy.array([[1,2,3],[4,5,6]], dtype = object)
+     or if you change a list or a tuple called 'a' to a numpy array code as:
+
+     numpy.asarray(a, dtype = object)   
 * otro
 ** matlab2python cheatsheet
    http://mathesaurus.sourceforge.net/matlab-numpy.html
