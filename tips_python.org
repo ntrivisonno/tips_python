@@ -1,4 +1,8 @@
 * functions
+** charact prog
+   python es:
+   -dinámico: no se comprueban los tipos de datos a medida que se van generando
+   -interpretado: se omite el proceso de compilación, ejecución y depuración
 ** encabezado
 *** begin prog
    """
@@ -59,6 +63,14 @@
      #Entra en except, ha ocurrido una excepción
      #Entra en finally, se ejecuta el bloque finally
 ** arrays/vectores
+*** row vs column vector
+    import numpy as np
+    #(5,2)
+    row = np.array([[0, 1], [0, 1], [0, 1], [0, 1], [0, 1]])
+    
+    #(2,5)
+    col = np.array([[8, 8, 8, 8, 8],[8, 8, 8, 8, 8]])
+
 *** crear un vector/array
     import numpy as np
     # data matrix 2x4
