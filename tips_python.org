@@ -689,6 +689,40 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
 ** size/shape 
    x = [1,2,3]
    print(np.shape(x))
+** stadistics
+   desviacion standard, (sigma): indica dispersion de los resutaldos 
+   respecto a la media (promedio)
+   varianza, (sigma)^2: similar a la desviación standard (sigma) al 
+   cuadrado
+   promedio: sería el valor medio, la suma de toda la muestra dividido 
+   la cantidad total de muestras.
+   mediana: es el valor medio después de haber ordenado de forma 
+   ascendente todos los valores. Quiere decir el valor por el cual 
+   existe 50% de la población debajo y por sobre este. Si la muestra es
+   par, divide la suma de los dos números por dos.
+   moda: es el valor que aparece más veces
+*** ej
+    import numpy as np
+
+    #velocidad = [32, 111, 138, 28, 59, 77, 97]
+    vel = [99, 86, 87, 88, 111, 86, 103, 87, 94, 78, 77, 85, 86]
+    dstd = np.std(vel)
+    var = np.var(vel)
+    prom = np.mean(vel)
+    mediana = np.median(vel)
+    
+    # for the mode, use the scipy "mode" method
+    from scipy import stats
+    moda = stats.mode(vel)
+    
+    print("La muestra de velocidad es:")
+    print("{}\n".format(vel))
+    print("La desviación standard ($\sigma$): {} ".format(dstd))
+    print("La varianza ($\sigma^2$): {} ".format(var))
+    print("El promedio: {} ".format(prom))
+    print("La mediana: {} ".format(mediana))
+    print("La moda: {} ".format(moda))
+    
 ** swapping values
    a = 23
    b = 45
