@@ -243,6 +243,10 @@
    names = ['Bob', 'Alice', 'Guido']
    for index, value in enumerate(names):
         print(f'{index}: {value}')
+** eps
+   for using eps
+
+   eps = np.finfo(float).eps
 ** is vs ==
    is compara si son iguales a donde apunta un puntero, == evalua si el valor del puntero es el mismo
 
