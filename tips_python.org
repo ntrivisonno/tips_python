@@ -694,10 +694,12 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
    x = [1,2,3]
    print(np.shape(x))
 ** stadistics
-   desviacion standard, (sigma): indica dispersion de los resutaldos 
+   desviacion standard, (sigma): indica dispersion de los resultados 
    respecto a la media (promedio)
    varianza, (sigma)^2: similar a la desviación standard (sigma) al 
    cuadrado
+   primero se calcula la viarianza y luego el desvio es la raiz cuad
+   de la varianza, por lo tanto, siempre dstd>0
    promedio: sería el valor medio, la suma de toda la muestra dividido 
    la cantidad total de muestras.
    mediana: es el valor medio después de haber ordenado de forma 
