@@ -269,7 +269,25 @@
    ## false
    
 ** =
-   ojo con el igual, que hace que apunte al mismo lugar de direcci'on??? check!
+   ojo con el igual, que hace que apunte al mismo lugar de direcci'on
+   el signo igual (para un arreglo) es un puntero a la dir de la 1er variable,
+   puede dar error, si se desea sobre-escribir alguna variable.
+   Solucion -> usar el m'etodo arreglo.copy()
+*** ej
+    import numpy as np
+    a = np.array(([1, 2, 3]))
+    aorig = a #ojo no sobre-escribe
+    a *= 2
+    print("aorig: {}".format(aorig))
+    print("a: {}".format(a))
+    #error a == aorig
+    # solo
+    import numpy as np
+    print("aorig: {}".format(aorig))
+    aorig = a.copy() # sol
+    print("aorig: {}".format(aorig))
+    print("aorig: {}".format(aorig))
+    print("a: {}".format(a))
 ** lambda function
    es una funcion para crear una funcion inline o para hacer una funcion de forma recursiva
 *** ej:
@@ -617,6 +635,17 @@ plt.show()
      
      plt.show()
 
+*** close/clear figures
+**** plt.clf()
+     clear figure: deletes all the figure but not close the windows. In subplots, just delete the indicated figure
+**** plt.close()
+     plt.close('all')
+     close figure: close the current windows, if no specified otherwise.
+**** plt.cla()
+     clear axis
+**** save figure
+     dir = '~/Documents/CIMEC/popurri/'
+     plt.savefig(dir+'plas.png',dpi=200)
 ** presione enter
    comando para que para continuar se debe presionar la tecla enter
 
