@@ -126,6 +126,23 @@
     print(datacol)
     print('np.shape(datacol)')
     print(np.shape(datacol))
+*** generar un vector a partir de un archivo txt
+**** ex
+     # Nombre del archivo de entrada
+     archivo_entrada = "numeros.txt"
+
+     # Leer el archivo y crear una lista de números
+     with open(archivo_entrada, "r") as archivo:
+         lineas = archivo.readlines()
+
+     # Eliminar espacios en blanco y saltos de línea, y convertir a números de punto flotante
+     numeros = [float(linea.strip()) for linea in lineas]
+
+     # Convertir la lista de números en una cadena con comas
+     cadena_numeros = ",".join(map(str, numeros))
+
+     printa(cadena_numeros)  # Imprime la cadena de números separados por comas
+
 *** trabajar arreglos como listas
     import numpy as np
     tt = [] # crea lista
@@ -136,6 +153,12 @@
     print(type(tta))
 *** warning/error of array with different length
     see warnings section at the end of the file
+*** matrices no simetricas
+    para crear una matriz de zeros de 4 filas y 5 columnas
+    filas = 4
+    columnas = 5
+
+    matriz = [[0] * columnas for _ in range(filas)]
 ** append
    metodo de una clase que agrega algo (num,lista, etc) a algo ya existente
 *** ej
@@ -152,6 +175,19 @@
    >>> a.append(b)
    >>> a
    [0, 1, 2, 3, 55, [9, 9]]
+** cambios de ',' por '.' para los flotantes
+*** ex
+    # script cambia , por .
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    with open ("./Vel_mag.csv") as f_input:
+        text = [l.replace(",", ".") for l in f_input]
+
+    data = np.loadtxt(text, delimiter=';')
+
+    np.savetxt('Vel_mag.csv',data,delimiter=";")
+
 ** comments
    para comentar una funci'on se usa la triple comilla ('''), de esta 
    forma si se hace bien al principio se usa para describir el atributo o el 
@@ -189,7 +225,7 @@
     # nos creamos un vector de casos para acceder a disintos simulaciones
     CASO = 0
     data = np.loadtxt('Resu_RBD/' + ['Forces_proc_C_C01.txt', 'Forces_proc_C_C02.txt', 'Forces_proc_C_C03.txt'][CASO], delimiter=',', skiprows=1)
-    # Encabezado del txt:
+    # Encabezado del txt:xo
     # Time, alpha, beta, delta2, V_inf (= V_t), u(v_body_X), v(v_body_Y), w(v_body_Z), p, q, r, gx, gy, gz, FX_body, FY_body, FZ_body
     M = data[:,0]
     alpha = data[:, 1]
@@ -235,6 +271,7 @@
 ** enumerate
 *** ex1 - base 1
    # use python3
+   # en realidad se puede colocar cualquier indice
    names = ['Bob', 'Alice', 'Guido']
    for index, value in enumerate(names, 1):
         print(f'{index}: {value}')
@@ -333,6 +370,41 @@
      b = list(a)
      b.remove(2)
      print(a)
+** list comprehension
+   List comprehensions in Python are a concise way to create new lists
+   based on existing lists or other iterable objects. They allow you to
+   perform operations on each element of the original list and generate
+   a new list in a single line of code. Here's the basic syntax of a 
+   list comprehension:
+
+   new_list = [expression for item in iterable if condition]
+
+   el principal uso es para identificar de forma visual que se está 
+   creando una lista    explicitando lo que se hace con la misma. Los 
+   for meten mucho ruido y es más dificil de leer
+*** ej
+    numbers = [1, 2, 3, 4, 5]
+    squares = [x**2 for x in numbers]
+    print(squares)  # Output: [1, 4, 9, 16, 25]
+
+    # ej2 num pares
+    numbers = [1, 2, 3, 4, 5]
+    evens = [x for x in numbers if x % 2 == 0]
+    print(evens)  # Output: [2, 4]
+    # ej3 sobre un vector calc la dif del cuadrado del consecutivo
+    vec = np.arange(4)
+    vec2 = [x**2 for x in vec]
+    dif = [vec2[x+1] - vec2[x] for x in range(len(vec)-1)]
+    # ej4
+    fruits = ['apple', 'banana', 'cherry']
+    colors = ['red', 'yellow', 'red']
+    pairs = [(fruit, color) for fruit in fruits for color in colors]
+    print(pairs)
+    # Output:
+    [('apple', 'red'), ('apple', 'yellow'), ('apple', 'red'), ('banana', 'red'),....
+    ....('banana', 'yellow'), ('banana', 'red'), ('cherry', 'red'),..
+    ....('cherry', 'yellow'), ('cherry', 'red')]
+
 ** file
    file handling
    pythong has several methods (functions) for handling files
@@ -425,6 +497,23 @@
     <function myfunc at 0x107012230>
     >>> funcs[0](2,3)
     5
+** maps
+   Benefits of the Python map function:
+   - Transforms data effortlessly, saving time.
+   - Boosts code readability – cleaner, concise scripts.
+   - Unleashes parallel processing for speedier results.
+*** ej
+    # vieja escuela approach 
+    number = input('Enter number with spaces: ').split()
+    digits = list()
+
+    for num in numbers:
+        num = int(num)
+	digits.append(num)
+
+    # nueva escuela approach
+    numbers = list(map(int, input('Enter number with spaces: ').split()))
+
 ** odeint - scipy
    integrador de ODEs
    https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html
@@ -719,6 +808,20 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
     dunder, es una expresion para abreviar "double underscore", ej:
     dunder bazz: __baz
     dunder baz dunder:  __baz__ (creo q el 'ultimo dunder se omite)
+** random
+   generate a vector with random numbers
+*** ex
+    import random
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    long = 10
+    vector = [random.randint(-3,4) for _ in range(long)]
+    prom = [np.mean(vector) for _ in vector]
+    print("Vector: ", vector)
+    print("Prom: {}".format(np.mean(vector)))
+    plt.plot(vector, '.');plt.plot(prom, label='prom');plt.title('vector={}'.format(vector));plt.legend();plt.show()
+
 ** size/shape 
    x = [1,2,3]
    print(np.shape(x))
@@ -790,6 +893,52 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
 
      print(tuple(x))
      print(tuple(x1))
+** table
+*** ex
+    # script que para un coef estimado a lo largo de todo un vuelo, 
+    # se genera la tabla de coef según el #mach
+
+    import pandas as pd
+
+    # Ejemplo de vector de datos (puedes reemplazarlo con tus propios datos)
+    # datos = [#mach, coef]
+    datos = [
+             (0.5, 0.1),
+	     (0.8, 0.2),
+	     (1.2, 0.3),
+	     (1.5, 0.4),
+	     (2.0, 0.5),
+	     (2.5, 0.6),
+	     ]
+
+     # Definir los rangos de número de Mach
+     rangos_mach = [0.0, 1.0, 2.0, 3.0]  # Puedes ajustar estos rangos según tus necesidades
+
+     # Inicializar listas para las sumas y las cantidades en cada rango
+     sumas = [0.0] * (len(rangos_mach) - 1)
+     cantidades = [0] * (len(rangos_mach) - 1)
+
+     # Recorrer el vector de datos y sumar los coeficientes en los rangos correspondientes
+     for mach, coeficiente in datos:
+        for i in range(len(rangos_mach) - 1):
+            if rangos_mach[i] <= mach < rangos_mach[i + 1]:
+                 sumas[i] += coeficiente
+		 cantidades[i] += 1
+
+      # Calcular el promedio en cada rango (dividir la suma por la cantidad)
+      promedios = [suma / cantidad if cantidad > 0 else 0.0 for suma, cantidad in zip(sumas, cantidades)]
+
+      # Crear una tabla (DataFrame) de pandas para mostrar los resultados
+      resultados = pd.DataFrame({
+      'Rango de Mach': [f'{rangos_mach[i]}-{rangos_mach[i + 1]}' for i in range(len(rangos_mach) - 1)],
+      'Suma de Coeficientes': sumas,
+      'Cantidad de Valores': cantidades,
+      'Promedio de Coeficientes': promedios
+      })
+
+      # Imprimir la tabla de resultados
+      print(resultados)
+
 ** varios
 *** agregar
 ** warnings
