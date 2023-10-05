@@ -268,6 +268,26 @@
     x = h5f['/Inertial_coord'][:] # me importa un vector x de size-> print(np.shape(x)) (1001,3)
     t = h5f['/Time'][:]
     h5f.close()
+** dict
+   diccionario
+*** definir
+    dic = {'CustID': [1, 2, 3],
+    'Name': ['Peter', 'Aldo', 'Pedro']}
+    
+    # grupos
+    dic.keys()
+*** acceder a valores
+    nombres = dic['Names']
+*** incorporar un valor nuevo
+    existen varias formas:
+**** usando corchetes
+     # nombre del diccionario[clave]=valor/es 
+     dic['Edades'] = [4, 5, 6]
+**** metodo update
+     dic.update({'key' : valores})
+     dic.update({'Edades' : [4, 5, 6]})
+*** incorporar un valor a clave ya existente
+    ver
 ** enumerate
 *** ex1 - base 1
    # use python3
@@ -893,15 +913,250 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
 
      print(tuple(x))
      print(tuple(x1))
-** table
-*** ex
-    # script que para un coef estimado a lo largo de todo un vuelo, 
-    # se genera la tabla de coef según el #mach
+** table - pandas - SQL
+   pandas library se usa muchas veces para reemplazar a SQL
+*** arreglos - series
+    En pandas, una Serie es una estructura de datos unidimensional 
+    similar a un arreglo o una lista en Python, pero con etiquetas
+    en lugar de índices enteros. Cada elemento en una Serie está
+    asociado a una etiqueta o un índice, lo que facilita el acceso
+    y la manipulación de los datos.
+**** ex1
+     import pandas as pd
 
+     # Crear una Serie a partir de una lista
+     serie_ejemplo = pd.Series([10, 20, 30, 40], 
+     index=['a', 'b', 'c', 'd'])
+
+     # Acceder a elementos por etiqueta
+     print(serie_ejemplo['b'])  # Imprimirá 20
+
+*** incorporar un vector fila a un dataFrame
+    ver tmb table/arreglos - series
+**** ex1
+     import pandas as pd
+     import numpy as np
+
+     # Supongamos que tienes un DataFrame llamado tabla_gral
+     tabla = pd.DataFrame({'Columna_A': [1, 2, 3], 'Columna_B': [4, 5, 6]})
+
+     # Arreglo ang
+     ang = ['alpha', 'beta']
+
+     # Crear una Serie a partir de ang
+     ult_reng = pd.Series(ang, index=tabla.columns)
+
+     # Agregar la fila a tabla_gral
+     tabla = tabla.append(ult_reng, ignore_index=True)
+
+     # Imprimir el DataFrame actualizado
+     print(tabla)
+
+*** built tabla
+    data = {
+    'Columna_A': [1, 2, 3],
+    'Columna_B': [4, 5, 6],
+    'Columna_C': [7, 8, 9]
+     }
+
+     df = pd.DataFrame(data)
+*** intercambiar columnas
+**** ex1
+     # intercamba los valores de una con la otra, si se quieren intercambiar las 
+     # columnas enteras
+     import pandas as pd
+
+     # Crear un DataFrame de ejemplo
+     data = {
+     'Columna_A': [1, 2, 3],
+     'Columna_B': [4, 5, 6],
+     'Columna_C': [7, 8, 9]
+     }
+
+     df = pd.DataFrame(data)
+
+     # Intercambiar las columnas "Columna_A" y "Columna_B"
+     df['Columna_A'], df['Columna_B'] = df['Columna_B'].copy(), df['Columna_A'].copy()
+
+     # Mostrar el DataFrame resultante
+     print(df)
+
+*** incorporar columna
+**** ex1 - met: corchetes    
+    data = {
+    'Col_A': [1, 2, 3],
+    'Col_B': [4, 5, 6],
+    'Col_C': [7, 8, 9]
+     }
+
+     df = pd.DataFrame(data)
+
+     df['Cd0'] = np.zeros(len(data['Col_A']))
+
+*** concatener columnas
+**** ex
+     import pandas as pd
+
+     # Crear dos DataFrames de ejemplo
+     data1 = {'A': [1, 2, 3], 'B': [4, 5, 6]}
+     data2 = {'X': [7, 8, 9], 'Y': [10, 11, 12]}
+     
+     df1 = pd.DataFrame(data1)
+     df2 = pd.DataFrame(data2)
+     
+     # Omitir la primera columna de df2
+     df2 = df2.iloc[:, 1:]  # Esto elimina la primera columna
+     
+     # Concatenar los DataFrames horizontalmente
+     resultado = pd.concat([df1, df2], axis=1)
+     
+     # Mostrar el DataFrame resultante
+     print(resultado)
+
+*** eliminar columna
+**** eliminar una columna específica
+     # df.drop()
+***** ex
+     import pandas as pd
+
+     # Crear dos DataFrames de ejemplo
+     data1 = {'A': [1, 2, 3], 'B': [4, 5, 6]}
+     data2 = {'X': [7, 8, 9], 'Y': [10, 11, 12], 'Z': [13, 14, 15]}  # Agregamos una columna Z en df2
+     
+     df1 = pd.DataFrame(data1)
+     df2 = pd.DataFrame(data2)
+     
+     # Eliminar la columna del medio (Y) de df2
+     df2 = df2.drop('Y', axis=1)
+     
+     # Concatenar los DataFrames horizontalmente
+     resultado = pd.concat([df1, df2], axis=1)
+     
+     # Mostrar el DataFrame resultante
+     print(resultado)
+
+**** eliminar 1er columna
+***** ex
+      import pandas as pd
+
+      # Crear dos DataFrames de ejemplo
+      data1 = {'A': [1, 2, 3], 'B': [4, 5, 6]}
+      data2 = {'X': [7, 8, 9], 'Y': [10, 11, 12]}
+      
+      df1 = pd.DataFrame(data1)
+      df2 = pd.DataFrame(data2)
+      
+      # Omitir la primera columna de df2
+      df2 = df2.iloc[:, 1:]  # Esto elimina la primera columna
+      
+      # Concatenar los DataFrames horizontalmente
+      resultado = pd.concat([df1, df2], axis=1)
+      
+      # Mostrar el DataFrame resultante
+      print(resultado)
+
+*** orden columnas segun criterio
+**** ex
+     import pandas as pd
+     
+     # Crear un DataFrame de ejemplo
+     data = {
+     'Nombre': ['Alice', 'Bob', 'Charlie'],
+     'Edad': [25, 30, 35],
+     'Ciudad': ['Nueva York', 'Los Ángeles', 'Chicago']
+     }
+     
+     df = pd.DataFrame(data)
+     
+     # Definir el orden deseado de las columnas
+     orden_deseado = ['Ciudad', 'Edad', 'Nombre']
+     
+     # Crear un nuevo DataFrame con las columnas en el orden deseado
+     df_ordenado = df[orden_deseado]
+     
+     # Mostrar el DataFrame resultante
+     print(df_ordenado)
+
+*** ex1 pandas
+    # script that estimates the standard coef from a flight
     import pandas as pd
+    import matplotlib.pyplot as plt
 
-    # Ejemplo de vector de datos (puedes reemplazarlo con tus propios datos)
-    # datos = [#mach, coef]
+    def crear_tabla_coef(datos, rangos_mach):
+        sumas = [0.0] * (len(rangos_mach) - 1)
+        cantidades = [0] * (len(rangos_mach) - 1)
+   
+        for mach, coeficiente in datos:
+            for i in range(len(rangos_mach) - 1):
+                if rangos_mach[i] <= mach < rangos_mach[i + 1]:
+                    sumas[i] += coeficiente
+                    cantidades[i] += 1
+   
+        promedios = [suma / cantidad if cantidad > 0 else 0.0 for suma, cantidad in zip(sumas, cantidades)]
+   
+        resultados = pd.DataFrame({
+            'Rango de Mach': [f'{rangos_mach[i]}-{rangos_mach[i + 1]}' for i in range(len(rangos_mach) - 1)],
+            'Suma de Coeficientes': sumas,
+            Cantidad de Valores': cantidades,
+            'Promedio de Coeficientes': promedios
+        })
+      
+        return resultados, promedios
+   
+    def crear_tabla_coef2(datos, rangos_mach):
+        sumas = [0.0] * (len(rangos_mach) - 1)
+        cantidades = [0] * (len(rangos_mach) - 1)
+   
+        for mach, coeficiente in datos:
+            for i in range(len(rangos_mach) - 1):
+                if rangos_mach[i] < mach <= rangos_mach[i + 1]:
+                    sumas[i] += coeficiente
+                    cantidades[i] += 1
+   
+        promedios = [suma / cantidad if cantidad > 0 else 0.0 for suma, cantidad in zip(sumas, cantidades)]
+   
+        resultados = pd.DataFrame({
+            'Rango de Mach': [f'{rangos_mach[i]}-{rangos_mach[i + 1]}' for i in range(len(rangos_mach) - 1)],
+            'Suma de Coeficientes': sumas,
+            'Cantidad de Valores': cantidades,
+            'Promedio de Coeficientes': promedios
+        })
+   
+        return resultados, promedios
+   
+   
+    # Ejemplo de uso:
+    datos = [
+        (0.5, 0.1),
+        (0.8, 0.2),
+        (1.2, 0.3),
+        (1.5, 0.4),
+        (2.0, 0.5),
+        (2.5, 0.6),
+    ]
+   
+    # Se debe agregar el valor 0.0, para generar un grupo, pero desp no se tiene en cuenta
+    rangos_mach = [0.0, 0.01, 0.60, 0.80, 0.90, 0.95, 1.00, 1.05, 1.10, 1.20, 1.35, 1.50, 1.75, 2.00, 5.00]
+    #coef = list(zip(mach, cmahat))
+
+    tabla_resultados, prom = crear_tabla_coef(datos, rangos_mach)
+    #tabla_resultados2, prom2 = crear_tabla_coef2(coef, rangos_mach)
+    print(tabla_resultados)
+   
+    #prom = prom[1:]
+   
+    #plt.plot(rangos_mach[1:],cmarbd,'o-',label='cma rbd');plt.plot(rangos_mach[1:],prom,'o-',label='cma hat T1');plt.plot(rangos_mach[1:],prom2,'o-',label='cma hat T2');plt.legend();plt.grid()
+    #dir = '/home/zeeburg/Downloads/delete/'
+    #plt.savefig(dir+'tabla_mach.pdf');plt.show()
+   
+*** ex2 pandas
+       # script que para un coef estimado a lo largo de todo un vuelo, 
+       # se genera la tabla de coef según el #mach
+   
+       import pandas as pd
+   
+       # Ejemplo de vector de datos (puedes reemplazarlo con tus propios datos)
+       # datos = [#mach, coef]
     datos = [
              (0.5, 0.1),
 	     (0.8, 0.2),
