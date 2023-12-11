@@ -1,0 +1,44 @@
+# function that solves the cuadratic
+import numpy as np
+import matplotlib.pyplot as plt
+
+def cuad(a,b,c):
+    r1 = (-b + np.sqrt(b**2-4*a*c))/(2*a)
+    r2 = (-b - np.sqrt(b**2-4*a*c))/(2*a)
+
+    return r1, r2
+
+
+rho = 200 #[kg * m-3]
+cp = 4.10 #[J * Kg-1 * K-1]
+k = 0.1 #[W * k-1 * m-2]
+vx = 0.0005 #[m * s-1]
+h = 0.01 #[W * k-1 * m-1]
+R = 0.1 #[m]
+Tc = 600
+Tf = 300
+
+a = 1
+b = rho*cp*vx/k
+c = 2*h/(k*R)
+
+r1, r2 = cuad(a,b,c)
+
+print('Raiz r1: {}'.format(r1))
+print('Raiz r2: {}'.format(r2))
+
+#---------
+# Sol. exact.
+x = np.linspace(0,1,50)
+
+c2 = (Tf - Tc * np.exp(r1))/(np.exp(r2)-np.exp(r1))
+c1 = Tc - c2
+exac = c1*np.exp(r1*x) + c2*np.exp(r2*x)
+
+plt.plot(x,exac, label = 'exact')
+
+print('#--------------------------------------------')
+print('\n FIN, OK!')
+plt.legend()
+plt.show()
+

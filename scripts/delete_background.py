@@ -8,3 +8,8 @@ input_path = 'fig_original.jpg'
 output_path = 'fig.png'
 inp = Image.open(input_path)
 output.save(output_path)
+
+print('#--------------------------------------------')
+print('\n FIN, OK!')
+
+plt.show()
