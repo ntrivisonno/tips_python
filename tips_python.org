@@ -268,6 +268,10 @@
     x = h5f['/Inertial_coord'][:] # me importa un vector x de size-> print(np.shape(x)) (1001,3)
     t = h5f['/Time'][:]
     h5f.close()
+*** ver todos los campos
+    import h5py
+    h5f=h5py.File(resul+'Data.hdf5','r')
+    campos = list(h5f.keys())
 ** dict
    diccionario
 *** definir
@@ -915,7 +919,7 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
      print(tuple(x1))
 ** table - pandas - SQL
    pandas library se usa muchas veces para reemplazar a SQL
-*** arreglos - series
+*** arreglos - series - listas_en_pandas
     En pandas, una Serie es una estructura de datos unidimensional 
     similar a un arreglo o una lista en Python, pero con etiquetas
     en lugar de índices enteros. Cada elemento en una Serie está
@@ -926,7 +930,7 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
 
      # Crear una Serie a partir de una lista
      serie_ejemplo = pd.Series([10, 20, 30, 40], 
-     index=['a', 'b', 'c', 'd'])
+     index=['a', 'b', 'c', 'd'], name='lista random')
 
      # Acceder a elementos por etiqueta
      print(serie_ejemplo['b'])  # Imprimirá 20
@@ -1194,6 +1198,48 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
       # Imprimir la tabla de resultados
       print(resultados)
 
+*** ex3 numeros not included in lista
+    # script for testing pandas
+    
+    import pandas as pd
+    
+    a = pd.Series([1,2,3,4,5], name='Serie A')
+    b = pd.Series([4,5,6,7,8], name='Serie B')
+    
+    df = pd.DataFrame({a.name: a, b.name: b})
+    
+    print('La tabla siguinte presenta los valores a,b')
+    print(df)
+
+    # para ver los elementos no incluidos usamos el método isin 
+    ainb = a.isin(b)
+    bina = b.isin(a)
+
+    anotinb = pd.Series(a[~ainb], name='A not in B')
+    print('Los valores de a no incluídos en b son:\n{}'.format(anotinb))
+*** multicolumns
+    para tener multicolumnas, usar el método pd.MultiIndex.from_tuples
+**** ex1
+     import pandas as pd
+     
+     # Crear un diccionario con datos de ejemplo
+     data = {
+     'A': [1, 2, 3],
+     'B': [4, 5, 6],
+     'C': [7, 8, 9]
+     }
+     
+     # Crear una multicolumna con tres columnas
+     multi_columns = pd.MultiIndex.from_tuples([('Grupo 1', 'Columna 1'),
+     ('Grupo 1', 'Columna 2'),
+     ('Grupo 2', 'Columna 3')])
+     
+     # Crear un DataFrame a partir del diccionario y la multicolumna
+     df = pd.DataFrame(data, columns=multi_columns)
+     
+     # Mostrar el DataFrame
+     print(df)
+
 ** varios
 *** agregar
 ** warnings
@@ -1211,6 +1257,30 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
      or if you change a list or a tuple called 'a' to a numpy array code as:
 
      numpy.asarray(a, dtype = object)   
+* OOP
+  progrmacion orientada a objetos
+** ver los metodos y atributos de una clase:
+   # Crear una instancia de la clase
+   objeto = MiClase()
+   
+   # Obtener todos los nombres disponibles en la clase
+   nombres = dir(objeto)
+   
+   # Filtrar para mostrar solo los métodos
+   metodos = [nombre for nombre in nombres if callable(getattr(objeto, nombre))]
+
+   # Filtrar para mostrar solo los atributos (variables)
+   atributos = [nombre for nombre in nombres if not callable(getattr(objeto, nombre))]
+
+   print("Métodos:", metodos)
+   print("Atributos:", atributos)
+   
+   # Si se quieren filtrar los métodos y atributos mágicos/especiales
+   metodos_filtrados = [nombre for nombre in metodos if not nombre.startswith('__')]
+
+   print("Métodos filtrados:", metodos_filtrados)
+
 * otro
 ** matlab2python cheatsheet
    http://mathesaurus.sourceforge.net/matlab-numpy.html
+   
