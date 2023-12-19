@@ -8,3 +8,6 @@ def reemplazar_espacios(cadena):
 texto = input("Ingrese una cadena de texto: ")
 resultado = reemplazar_espacios(texto)
 print("Resultado:\n{}".format(resultado))
+
+print('#--------------------------------------------')
+print('\n FIN, OK!')
