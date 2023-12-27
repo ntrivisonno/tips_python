@@ -562,6 +562,19 @@
     plt.legend(loc=1)
     plt.grid(True)
     plt.show()
+** os
+   liberia para interactuar con el sistema operativo (operating system)
+*** para ver el dicrectorio actual y cambiarlo
+**** ej
+     import os
+     # cwd: current working directory
+     current_directory = os.getcwd()
+     print(current_directory)
+     
+     os.chdir('../')
+     
+     print(f'New directory: {os.getcwd()}')
+     
 ** plot
 si hay varios plots y queremos que se muestren todos a lo 'ultimo, 
 podemos hacer un plt.show() a lo 'ultimo, o en cada plt.show() poner:
@@ -778,7 +791,7 @@ plt.show()
     print(("%3f: %s" % (k, sol["status"]))) # float
     print(("%3d: %s" % (k, sol["status"]))) # entero
 ** underscore "_"
-https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscore%20prefix%20is%20meant,public%E2%80%9D%20variables%20like%20Java%20does.
+   https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscore%20prefix%20is%20meant,public%E2%80%9D%20variables%20like%20Java%20does.
 *** Single Trailing Underscore: var_  -> evitar conflicto nombres
     Se usa para evitar el conflicto de nombres, generalmente como ciertos
     nombres ya est'an tomados, por clases, etc, se coloca el underscore
@@ -1059,6 +1072,12 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
       # Mostrar el DataFrame resultante
       print(resultado)
 
+*** leer datos de un csv con pandas
+    cuando se tienen espacios en la cabecera del archivo, y se quieren omitir:
+    usar el metodo: skipinitialspace
+**** ej
+     import pandas as pd
+     data=pd.read_csv('./Forces_proc.txt', skipinitialspace=True)
 *** orden columnas segun criterio
 **** ex
      import pandas as pd
@@ -1277,8 +1296,10 @@ https://dbader.org/blog/meaning-of-underscores-in-python#:~:text=The%20underscor
    
    # Si se quieren filtrar los métodos y atributos mágicos/especiales
    metodos_filtrados = [nombre for nombre in metodos if not nombre.startswith('__')]
+   atributos_filtrados = [nombre for nombre in atributos if not nombre.startswith('__')]
 
    print("Métodos filtrados:", metodos_filtrados)
+   print("Atributos filtrados:", atributos_filtrados)
 
 * otro
 ** matlab2python cheatsheet
