@@ -330,10 +330,10 @@
    ## false
    
 ** =
-   ojo con el igual, que hace que apunte al mismo lugar de direcci'on
+   ojo con el igual, que hace que apunte al mismo lugar de dirección
    el signo igual (para un arreglo) es un puntero a la dir de la 1er variable,
    puede dar error, si se desea sobre-escribir alguna variable.
-   Solucion -> usar el m'etodo arreglo.copy()
+   Solución -> usar el método arreglo.copy()
 *** ej
     import numpy as np
     a = np.array(([1, 2, 3]))
@@ -350,7 +350,7 @@
     print("aorig: {}".format(aorig))
     print("a: {}".format(a))
 ** lambda function
-   es una funcion para crear una funcion inline o para hacer una funcion de forma recursiva
+   es una función para crear una función inline o para hacer una función de forma recursiva
 *** ej:
     # testing lambda function
     suma = lambda a,b: a+b
@@ -404,7 +404,7 @@
    new_list = [expression for item in iterable if condition]
 
    el principal uso es para identificar de forma visual que se está 
-   creando una lista    explicitando lo que se hace con la misma. Los 
+   creando una lista explicitando lo que se hace con la misma. Los 
    for meten mucho ruido y es más dificil de leer
 *** ej
     numbers = [1, 2, 3, 4, 5]
@@ -576,9 +576,9 @@
      print(f'New directory: {os.getcwd()}')
      
 ** plot
-si hay varios plots y queremos que se muestren todos a lo 'ultimo, 
-podemos hacer un plt.show() a lo 'ultimo, o en cada plt.show() poner:
-plt.plot(block=False)
+   si hay varios plots y queremos que se muestren todos a lo último, 
+   podemos hacer un plt.show() a lo último, o en cada plt.show() poner:
+   plt.plot(block=False)
 *** plotea dos plot en una sola graf
 **** ej
      import numpy as np
@@ -640,7 +640,7 @@ plt.plot(block=False)
          ax[k].set_xlabel('time [s]')
          ax[k].set_ylabel('Mz [Nm]')
      
-plt.show()
+     plt.show()
    
 **** a pata
      import numpy as np
@@ -803,12 +803,12 @@ plt.show()
      >>> def make_object(name, class_):
      ...     pass
 *** Single Leading Underscore: _var -> variable interna
-    solo x convencci'on (en lo que respecta a variables y m'etodos).
+    solo x convencción (en lo que respecta a variables y métodos).
     es una sugerencia de la comunidad programadora, 
-    y solo significa que es una variable interna, nada m'as
+    y solo significa que es una variable interna, nada más
     No hace diferencia entre clase publica y privada. En realidad se usa
     el "_" antes para decir: "hey, esto no realmente significa que es
-    parte de la interfaz p'ublica de la clase. Mejor dejemoslo solo"
+    parte de la interfaz pública de la clase. Mejor dejemoslo solo"
 **** ej:
      class Test:
      def __init__(self):
@@ -863,7 +863,7 @@ plt.show()
    x = [1,2,3]
    print(np.shape(x))
 ** stadistics
-   desviacion standard, (sigma): indica dispersion de los resultados 
+   desviación standard, (sigma): indica dispersion de los resultados 
    respecto a la media (promedio)
    varianza, (sigma)^2: similar a la desviación standard (sigma) al 
    cuadrado
@@ -916,7 +916,7 @@ plt.show()
     1+j in a
    
 *** zip, mershear dos tuplas
-    la funcion zip, retorna un objeto zip, que es un iterador de tuplas
+    la función zip, retorna un objeto zip, que es un iterador de tuplas
     donde los primeros valores de cada tupla se pasan juntos, y asi
     sucesivamente
 **** ej
@@ -979,7 +979,7 @@ plt.show()
      df = pd.DataFrame(data)
 *** intercambiar columnas
 **** ex1
-     # intercamba los valores de una con la otra, si se quieren intercambiar las 
+     # intercambia los valores de una con la otra, si se quieren intercambiar las 
      # columnas enteras
      import pandas as pd
 
@@ -1304,4 +1304,14 @@ plt.show()
 * otro
 ** matlab2python cheatsheet
    http://mathesaurus.sourceforge.net/matlab-numpy.html
+<<<<<<< Updated upstream
    
+=======
+** teoría
+*** instancias   
+    una isntancia es un objeto específico creado a partir de una clase, la que tiene sus atributos (variables) y métodos (funciones).
+**** ej    
+     def class Car:
+     
+    
+>>>>>>> Stashed changes
