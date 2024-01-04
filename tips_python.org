@@ -329,6 +329,28 @@
    a is c
    ## false
    
+** inspect
+   import inspect
+   La librería inspect en Python proporciona una serie de herramientas para examinar 
+   objetos vivos en tiempo de ejecución. Esta biblioteca es útil para obtener información
+   sobre módulos, clases, funciones, métodos, etc. Permite inspeccionar y analizar el 
+   código fuente, estructura y otros detalles de los objetos durante la ejecución del 
+   programa.
+*** ejemplos
+**** inspect.getmembers(object[, predicate]): 
+    Retorna todos los miembros de un objeto, incluyendo atributos, métodos, etc. Puede 
+    aceptar un predicado opcional para filtrar los miembros.
+**** inspect.ismodule(object), inspect.isclass(object), inspect.isfunction(object)
+    Estas funciones verifican si un objeto dado es un módulo, una clase, una función, etc.
+**** inspect.getsource(object)
+    Devuelve el código fuente de un objeto si está disponible.
+**** inspect.signature(func)
+    Devuelve un objeto que representa la firma de la función pasada como argumento, 
+    permitiendo el acceso a los parámetros y sus propiedades.
+**** inspect.getdoc(object)
+    Retorna la documentación (docstring) de un objeto si está disponible.
+**** inspect.getfile(object)
+    Retorna la ruta al archivo fuente en el que se definió un objeto si está disponible
 ** =
    ojo con el igual, que hace que apunte al mismo lugar de dirección
    el signo igual (para un arreglo) es un puntero a la dir de la 1er variable,
@@ -366,6 +388,18 @@
     suma = lambda a,b: (a,b)
 
     print(suma(2,4))
+*** conocer la ley de la función
+    para conocer la ley de la función, lo mismo que para otras funciones, se debe usar la 
+    libería inspect.
+    ya que de lo contrario, al poner print(lambdaFun) mostrará la dirección de memoria
+    donde se encuentra almacenada.
+**** ej
+     import inspect
+     import numpy as np
+     # función Blausios para calcular espesor de capa límite
+     delta = lambda Re, r, L: 5 * L / (np.sqrt(Re)) * np.sqrt( r / L)
+     print('La función tiene la ley:')
+     print(inspect.getsource(delta))
 ** list
    es una estructura definida [], que tiene una gran cantidad de métodos asociados
    # lista != tupla
