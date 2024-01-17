@@ -1389,8 +1389,12 @@ cv.close()
 ** teoría
 *** instancias   
     una isntancia es un objeto específico creado a partir de una clase, la que tiene sus atributos (variables) y métodos (funciones).
-**** ej    
-     def class Car:
-     
-    
->>>>>>> Stashed changes
+**** ej
+     # ejmplo de clase
+     class Car:
+          def __init__(self, brand, model):
+          self.brand = brand
+	  self.model = model
+
+     # en cosola ejecutar
+     myCar = Car('Peugeot', 308)
