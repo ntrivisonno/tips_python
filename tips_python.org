@@ -191,7 +191,7 @@
 ** comments
    para comentar una funci'on se usa la triple comilla ('''), de esta 
    forma si se hace bien al principio se usa para describir el atributo o el 
-   m'etodo. Esto se denomina docstring y se llama al atributo __doc__
+   método. Esto se denomina docstring y se llama al atributo __doc__
 *** ej:
     # Functions
     def euler(xk,dt,A,B,uk):
@@ -609,6 +609,16 @@
      
      print(f'New directory: {os.getcwd()}')
      
+** pdf2word
+   library to convert pdf2word
+*** ej
+    #pip3 install pdf2docx
+    from pdf2docx import Converter
+    pdf_file = '2008-Ueno_Drag_decomposition_Analysis.pdf'
+    word_file = '2008-Ueno_Drag_decomposition_Analysis.docx'
+    cv = Converter(pdf_file)
+    cv.convert(word_file)
+cv.close()
 ** plot
    si hay varios plots y queremos que se muestren todos a lo último, 
    podemos hacer un plt.show() a lo último, o en cada plt.show() poner:
@@ -932,6 +942,23 @@
     print("La mediana: {} ".format(mediana))
     print("La moda: {} ".format(moda))
     
+** strings
+*** replace   
+    reemplazar espacios/x por otro caracter
+**** ej:
+     # script for changing white spaces into underscore
+
+     def reemplazar_espacios(cadena):
+          nueva_cadena = cadena.replace(" ", "_")
+	  return nueva_cadena
+
+     # Ejemplo de uso
+     texto = input("Ingrese una cadena de texto: ")
+     resultado = reemplazar_espacios(texto)
+     print("Resultado:\n{}".format(resultado))
+
+     print('#--------------------------------------------')
+     print('\n FIN, OK!')
 ** swapping values
    a = 23
    b = 45
@@ -949,21 +976,6 @@
 *** verificar si esta dentro
     1+j in a
    
-*** zip, mershear dos tuplas
-    la función zip, retorna un objeto zip, que es un iterador de tuplas
-    donde los primeros valores de cada tupla se pasan juntos, y asi
-    sucesivamente
-**** ej
-     a1 = ("John", "Charles", "Mike", "Nico")
-     a = ("John", "Charles", "Mike")
-     b = ("1", "Christy", "Monica","pp")
-
-     x = zip(a, b)
-     x1 = zip(a1, b)
-     #use the tuple() function to display a readable version of the result:
-
-     print(tuple(x))
-     print(tuple(x1))
 ** table - pandas - SQL
    pandas library se usa muchas veces para reemplazar a SQL
 *** arreglos - series - listas_en_pandas
@@ -1310,6 +1322,39 @@
      or if you change a list or a tuple called 'a' to a numpy array code as:
 
      numpy.asarray(a, dtype = object)   
+** zip
+    la función zip, retorna un objeto zip, que es un iterador de tuplas
+    donde los primeros valores de cada tupla se pasan juntos, y asi
+    sucesivamente
+*** zip, mershear dos tuplas
+**** ej
+     a1 = ("John", "Charles", "Mike", "Nico")
+     a = ("John", "Charles", "Mike")
+     b = ("1", "Christy", "Monica","pp")
+
+     x = zip(a, b)
+     x1 = zip(a1, b)
+     #use the tuple() function to display a readable version of the result:
+
+     print(tuple(x))
+     print(tuple(x1))
+*** desglosar una lista en valores, indices, etc**** ej
+    zipped = [(1, 'a'), (2, 'b'), (3, 'c')]
+    number, iter = zip(*zipped) 
+   
+    print(number={})
+    iter(iter={})
+*** merging two list with different sizes/lengths
+**** ej
+     # example of zip with different length iterables
+     from itertools import zip_longest
+     names = ['Alice', 'Bob']
+     scores = [85, 92, 78]
+     zipped = zip_longest(names, scores, fillvalue = 'N/A')
+     
+     value1, value2 = zip(*zipped) #el asterisco es el desconstructor del objeto
+     print(f'values1:{value1}')
+     print(f'values2:{value2}')
 * OOP
   progrmacion orientada a objetos
 ** ver los metodos y atributos de una clase:
