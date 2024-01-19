@@ -1118,6 +1118,52 @@ cv.close()
       # Mostrar el DataFrame resultante
       print(resultado)
 
+*** crear archivo datos csv
+    crear archivo csv with pandas
+**** ej
+     # script para generar ptos de blockMesh dynamesh
+#tengo la sigueinte lsita de ptos, hacer dos archivos *.csv con los puntos ib y ob
+import csv
+
+vi = 0.7
+vo = 1
+
+#// Inner blocks
+a0=(-vi, -vi, -vi)
+b0=( vi, -vi, -vi)
+c0=( vi,  vi, -vi)
+d0=(-vi,  vi, -vi)
+e0=(-vi, -vi,  vi)
+f0=( vi, -vi,  vi)
+g0=( vi,  vi,  vi)
+h0=(-vi,  vi,  vi)
+
+ib = [a0, b0, c0, d0, e0, f0, g0, h0]
+     
+#// Outer blocks
+a1=(-vo, -vo, -vo)
+b1=( vo, -vo, -vo)
+c1=( vo,  vo, -vo)
+d1=(-vo,  vo, -vo)
+e1=(-vo, -vo,  vo)
+f1=( vo, -vo,  vo)
+g1=( vo,  vo,  vo)
+h1=(-vo,  vo,  vo)
+
+ob = [a1, b1, c1, d1, e1, f1, g1, h1]
+
+# Guardar puntos internos en CSV
+with open('puntos_ib.csv', 'w', newline='') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(['X', 'Y', 'Z'])
+    csvwriter.writerows(ib)
+
+# Guardar puntos externos en CSV
+with open('puntos_ob.csv', 'w', newline='') as csvfile:
+    csvwriter = csv.writer(csvfile)
+    csvwriter.writerow(['X', 'Y', 'Z'])
+    csvwriter.writerows(ob)
+
 *** leer datos de un csv con pandas
     cuando se tienen espacios en la cabecera del archivo, y se quieren omitir:
     usar el metodo: skipinitialspace
