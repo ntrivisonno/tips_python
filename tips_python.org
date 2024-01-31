@@ -959,6 +959,41 @@ cv.close()
 
      print('#--------------------------------------------')
      print('\n FIN, OK!')
+*** split
+    incorporar el siguiente metodo para leer las fuerzas aerodinamicas que se deben calcular en fuerzas totales. Incorporar estas sentencias 
+    en la clase Aux.AerodynamicCoefEstimator. Also verified the type thta the input is a string
+**** ej
+# incorporar el siguiente metodo para leer las fuerzas aerodinamicas que se deben calcular en fuerzas totales. Incorporar estas sentencias en la clase Aux.AerodynamicCoefEstimator. Also verified the type thta the input is a string
+#t = 'drag,drop,more'
+t = ' magnus, drag'
+#t = 'tito'
+#t=[3]
+
+#t = 3
+if isinstance(t, str):  # Verificar si t es una cadena (str)
+    # Dividir por comas y luego unir los resultados por espacios
+    p = ' '.join(t.split(',')).split()
+
+    wordFound = False  # Bandera para seguir si se encuentra alguna palabra clave
+
+    for i in p:
+        i = i.upper()  # Convertir la palabra a mayúsculas
+
+        if i == 'DRAG':
+            print('La fuerza Tot incluye DRAG')
+            wordFound = True
+        elif i == 'LIFT':
+            print('La fuerza Tot incluye LIFT')
+            wordFound = True
+        elif i == 'MAGNUS':
+            print('La fuerza Tot incluye MAGNUS')
+            wordFound = True
+
+    if not wordFound:
+        print('¡Alerta! Ninguna de las palabras clave (DRAG, LIFT, MAGNUS) fue encontrada.')
+else:
+    print(f'¡Alerta! La variable no es una cadena (str).\nt: [{t}]')
+    
 ** swapping values
    a = 23
    b = 45
@@ -1055,9 +1090,9 @@ cv.close()
      df = pd.DataFrame(data)
 
      df['Cd0'] = np.zeros(len(data['Col_A']))
-
+     # en caso de incorporar vectores de distinto tamaño, se debe usar pd.concat
 *** concatener columnas
-**** ex
+**** ex igual tamaño
      import pandas as pd
 
      # Crear dos DataFrames de ejemplo
@@ -1076,6 +1111,25 @@ cv.close()
      # Mostrar el DataFrame resultante
      print(resultado)
 
+**** ex !tamaño
+     import pandas as pd
+
+     # Se crea el diccionario con datos
+     data1 = {'A': [1, 2, 3], 'B': [4, 5, 6]}
+
+     # Crear dos DataFrames de ejemplo
+     df = pd.DataFrame(data1)
+
+     rows, cols = df.shape
+
+     # Generar un vector Null del tamano del dataFrame
+     tamano_deseado = 2
+
+     # Crear una serie con NaN y el tamaño deseado
+     newCol = pd.Series([None] * tamano_deseado, name='NewCol')
+     
+     df = pd.concat([df, newCol], axis=1)
+     
 *** eliminar columna
 **** eliminar una columna específica
      # df.drop()
@@ -1118,6 +1172,43 @@ cv.close()
       # Mostrar el DataFrame resultante
       print(resultado)
 
+*** guardar/escribir datos en archivo
+**** ej
+df.to_csv('nombre_del_archivo.csv', index=False)
+
+#index=False no se guardan los índices de las columnas
+*** exploring data - most frequency commands
+**** ej
+import pandas as pd
+import seaborn as sns
+
+fileName = 'pepe.txt'
+# Read data
+data = pd.readcsv(fileName)
+
+# Displays first fewRows
+print(data.head())
+
+# Summery statics
+print(data.describe())
+
+# Check for missing values
+# isnull method will give a boolean is is null or not
+# data.isnull() gives the dataFrame boolean
+print(data.isnull().sum())
+
+# Drops rows with missing values
+dataCleaned = data.dropna()
+
+# Correlation Values
+# corr() method
+
+correlationMatrix = data_cleaned.corr()
+
+plt.figure(figsize=(10,8))
+sns.heatmap(correlationMatrix, annot = True, cmap = 'coolwarm')
+plt.title('Correlation HeatMap')
+plt.show()
 *** crear archivo datos csv
     crear archivo csv with pandas
 **** ej
