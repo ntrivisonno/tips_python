@@ -1,7 +1,8 @@
 * functions
 ** charact prog
    python es:
-   -dinámico: no se comprueban los tipos de datos a medida que se van generando
+   -dinámico: no se comprueban los tipos de datos. De hecho se checkean los tipos a medida que se van
+   generando
    -interpretado: se omite el proceso de compilación, ejecución y depuración
 ** encabezado
 *** begin prog
@@ -598,6 +599,45 @@
     plt.show()
 ** os
    liberia para interactuar con el sistema operativo (operating system)
+*** obtener valores de las carpetas del directorio actual, 
+    ej: levantar las carpetas de tiempos de una corrida de OF
+**** ej:
+# script que levanta todo los nombres (carpeta y archivos) de un directorio y filtra los paso del tiempo de una corrida de OF
+import os
+import csv
+
+
+# Ruta del directorio
+directorio = "./"  # Reemplaza esto con la ruta correcta
+
+# Lista para almacenar los pasos de tiempo
+pasos_de_tiempo = []
+
+# Recorre el directorio
+for entrada in os.listdir(directorio):
+    ruta_completa = os.path.join(directorio, entrada)
+
+    # Verifica si es un directorio y tiene un formato num�rico (podr�a ser un paso de tiempo)
+    if os.path.isdir(ruta_completa) and entrada.replace(".", "", 1).isdigit():
+        pasos_de_tiempo.append(float(entrada))  # Convierte a tipo float
+
+# Ordena la lista de pasos de tiempo
+pasos_de_tiempo.sort()
+
+# Imprime la lista resultante
+print(pasos_de_tiempo)
+print(f'Se guardaron los pasos de tiempo en la variable: "pasos_de_tiempo"')
+
+# write csv file
+nombreArchivo = 'tiempoOF_csv'
+ruta_csv = os.path.join(os.getcwd(), nombreArchivo)
+with open(ruta_csv, 'w', newline='') as archivo_csv:
+    escritor_csv = csv.writer(archivo_csv)
+    escritor_csv.writerow(['Pasos de Tiempo'])  # Escribir encabezado
+    for paso_tiempo in pasos_de_tiempo:
+        escritor_csv.writerow([paso_tiempo])
+
+
 *** para ver el dicrectorio actual y cambiarlo
 **** ej
      import os
@@ -609,9 +649,43 @@
      
      print(f'New directory: {os.getcwd()}')
      
-** pdf2word
+** pdf
+*** unir dos pdf
+**** ej
+import PyPDF2
+
+def unir_pdfs(archivo1, archivo2, archivo_salida):
+    # Abrir los archivos PDF en modo de lectura binaria
+    with open(archivo1, 'rb') as file1, open(archivo2, 'rb') as file2:
+        # Crear objetos de lectura para ambos archivos PDF
+        pdf_reader1 = PyPDF2.PdfReader(file1)
+        pdf_reader2 = PyPDF2.PdfReader(file2)
+
+        # Crear un objeto de escritura para el archivo de salida
+        pdf_writer = PyPDF2.PdfWriter()
+
+        # Agregar todas las páginas del primer archivo
+        for pagina in range(len(pdf_reader1.pages)):  # Utiliza len(reader.pages)
+            pdf_writer.add_page(pdf_reader1.pages[pagina])
+
+        # Agregar todas las páginas del segundo archivo
+        for pagina in range(len(pdf_reader2.pages)):  # Utiliza len(reader.pages)
+            pdf_writer.add_page(pdf_reader2.pages[pagina])
+
+        # Guardar el resultado en un nuevo archivo PDF
+        with open(archivo_salida, 'wb') as file_salida:
+            pdf_writer.write(file_salida)
+
+# Ejemplo de uso
+archivo1 = '/home/zeeburg/Downloads/portfolio_CAD.pdf'
+archivo2 = '/home/zeeburg/Downloads/cv_Trivisonno.pdf'
+archivo_salida = '/home/zeeburg/Downloads/resultado.pdf'
+
+unir_pdfs(archivo1, archivo2, archivo_salida)
+
+*** pdf2word
    library to convert pdf2word
-*** ej
+**** ej
     #pip3 install pdf2docx
     from pdf2docx import Converter
     pdf_file = '2008-Ueno_Drag_decomposition_Analysis.pdf'
