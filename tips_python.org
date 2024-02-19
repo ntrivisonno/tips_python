@@ -1246,6 +1246,18 @@ else:
       # Mostrar el DataFrame resultante
       print(resultado)
 
+*** filtrar columnas con designaciones especiales
+    tengo un hear de la siguiente manera:
+    Index(['Time', 'Cd', 'Cs', 'Cl', 'CmRoll', 'CmPitch', 'CmYaw', 'Cd(f)',
+          'Cd(r)', 'Cs(f)', 'Cs(r)', 'Cl(f)', 'Cl(r)'],
+	  dtype='object')
+**** filtro las que tienen (f) o (r) y me quedo con esas variables
+     # se usa el '\' para indicar el caracter especial del paréntesis y además
+     # '|' indica OR en booleano
+     col_filtradas = df.filter(regex='\(f\)|\(r\)', axis=1)
+**** al revéz, filtro según un criterio y me quedo con lo otro
+     # uso el signo de negación '~'
+     col_filtradas2 = coef.loc[:, ~coef.columns.str.contains('\(f\)|\(r\)')]
 *** guardar/escribir datos en archivo
 **** ej
 df.to_csv('nombre_del_archivo.csv', index=False)
@@ -1334,7 +1346,9 @@ with open('puntos_ob.csv', 'w', newline='') as csvfile:
     usar el metodo: skipinitialspace
 **** ej
      import pandas as pd
-     data=pd.read_csv('./Forces_proc.txt', skipinitialspace=True)
+     data = pd.read_csv('./Forces_proc.txt', skiprows = 6, skipinitialspace=True)
+     # columnas, guardamos en una lista
+     cols = list(data.columns) 
 *** orden columnas segun criterio
 **** ex
      import pandas as pd
@@ -1569,27 +1583,27 @@ with open('puntos_ob.csv', 'w', newline='') as csvfile:
 * OOP
   progrmacion orientada a objetos
 ** ver los metodos y atributos de una clase:
-   # Crear una instancia de la clase
-   objeto = MiClase()
+# Crear una instancia de la clase
+objeto = MiClase()
    
-   # Obtener todos los nombres disponibles en la clase
-   nombres = dir(objeto)
+# Obtener todos los nombres disponibles en la clase
+nombres = dir(objeto)
    
-   # Filtrar para mostrar solo los métodos
-   metodos = [nombre for nombre in nombres if callable(getattr(objeto, nombre))]
+# Filtrar para mostrar solo los métodos
+metodos = [nombre for nombre in nombres if callable(getattr(objeto, nombre))]
 
-   # Filtrar para mostrar solo los atributos (variables)
-   atributos = [nombre for nombre in nombres if not callable(getattr(objeto, nombre))]
+# Filtrar para mostrar solo los atributos (variables)
+atributos = [nombre for nombre in nombres if not callable(getattr(objeto, nombre))]
 
-   print("Métodos:", metodos)
-   print("Atributos:", atributos)
+print("Métodos:", metodos)
+print("Atributos:", atributos)
    
-   # Si se quieren filtrar los métodos y atributos mágicos/especiales
-   metodos_filtrados = [nombre for nombre in metodos if not nombre.startswith('__')]
-   atributos_filtrados = [nombre for nombre in atributos if not nombre.startswith('__')]
+# Si se quieren filtrar los métodos y atributos mágicos/especiales
+metodos_filtrados = [nombre for nombre in metodos if not nombre.startswith('__')]
+atributos_filtrados = [nombre for nombre in atributos if not nombre.startswith('__')]
 
-   print("Métodos filtrados:", metodos_filtrados)
-   print("Atributos filtrados:", atributos_filtrados)
+print("Métodos filtrados:", metodos_filtrados)
+print("Atributos filtrados:", atributos_filtrados)
 
 * otro
 ** matlab2python cheatsheet
