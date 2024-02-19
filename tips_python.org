@@ -599,6 +599,23 @@
     plt.show()
 ** os
    liberia para interactuar con el sistema operativo (operating system)
+*** métodos más populares
+**** métodos populares
+os.path.join(path, *paths): Combina uno o más componentes de ruta en una sola ruta.
+os.path.abspath(path): Devuelve la ruta absoluta del archivo o directorio dado.
+os.path.dirname(path): Devuelve el directorio principal de una ruta.
+os.path.basename(path): Devuelve el componente final de una ruta.
+os.path.exists(path): Comprueba si la ruta especificada existe.
+os.path.isfile(path): Comprueba si la ruta especificada apunta a un archivo.
+os.path.isdir(path): Comprueba si la ruta especificada apunta a un directorio.
+os.listdir(path='.'): Devuelve una lista con los nombres de los elementos en el directorio dado.
+os.mkdir(path): Crea un nuevo directorio.
+os.makedirs(name): Crea directorios recursivamente.
+os.remove(path): Elimina un archivo.
+os.rmdir(path): Elimina un directorio vacío.
+os.removedirs(path): Elimina directorios recursivamente.
+os.rename(src, dst): Renombra un archivo o directorio.
+os.getcwd(): Devuelve el directorio de trabajo actual.     
 *** obtener valores de las carpetas del directorio actual, 
     ej: levantar las carpetas de tiempos de una corrida de OF
 **** ej:
@@ -636,8 +653,6 @@ with open(ruta_csv, 'w', newline='') as archivo_csv:
     escritor_csv.writerow(['Pasos de Tiempo'])  # Escribir encabezado
     for paso_tiempo in pasos_de_tiempo:
         escritor_csv.writerow([paso_tiempo])
-
-
 *** para ver el dicrectorio actual y cambiarlo
 **** ej
      import os
@@ -1087,6 +1102,73 @@ else:
    
 ** table - pandas - SQL
    pandas library se usa muchas veces para reemplazar a SQL
+*** métodos populares de pandas
+sea df el dataFrame:
+df = pd.dataFrame(tabla,csv,etc)
+**** head() y tail():
+Descripción: Muestra las primeras o últimas filas del DataFrame.
+***** ej
+df.head()  # Muestra las primeras 5 filas por defecto
+df.tail(10)  # Muestra las últimas 10 filas
+**** info()
+Proporciona información sobre el DataFrame, incluyendo tipos de datos y valores no nulos.
+***** ej
+df.info()
+**** describe()
+Proporciona estadísticas descriptivas para columnas numéricas.
+***** ej
+Proporciona estadísticas descriptivas para columnas numéricas.
+**** shape
+Retorna una tupla con la cantidad de filas y columnas del DataFrame.
+***** ej
+df.shape
+**** columns
+Retorna una lista con los nombres de las columnas del DataFrame.
+***** ej
+df.columns
+**** index
+Retorna el índice del DataFrame.
+***** ej
+df.index
+**** loc[] y iloc[]
+Permiten acceder a un grupo de filas y columnas por etiquetas o índices
+***** ej
+df.loc[1:3, ['Columna1', 'Columna2']]
+df.iloc[1:3, [0, 1]]
+**** isin()
+Filtra filas basadas en si los valores están presentes en una lista.
+***** ej
+df[df['Columna'].isin(['valor1', 'valor2'])]
+**** groupby()
+Agrupa el DataFrame según una o varias columnas
+***** ej
+df.groupby('Columna').mean()
+**** sort_values()
+Ordena el DataFrame por valores específicos en una o varias columnas.
+***** ej
+df.sort_values(by='Columna', ascending=False)
+**** drop()
+Elimina filas o columnas del DataFrame
+***** ej
+df.drop(['Columna'], axis=1)
+**** fillna()
+Rellena los valores NaN con un valor específico o utilizando una estrategia de interpolación.
+***** ej
+df.fillna(valor)
+**** isna() y notna()
+Retorna un DataFrame de la misma forma que df, pero con True o False según si un elemento es 
+NaN o no NaN, respectivamente.
+***** ej
+df.isna()
+df.notna()
+**** apply()
+Aplica una función a lo largo de un eje del DataFrame.
+***** ej
+df['Columna'].apply(funcion)
+**** pivot_table()
+Crea una tabla dinámica a partir de un DataFrame.
+***** ej
+pd.pivot_table(df, values='Valor', index='Index', columns='Columna', aggfunc='mean')
 *** arreglos - series - listas_en_pandas
     En pandas, una Serie es una estructura de datos unidimensional 
     similar a un arreglo o una lista en Python, pero con etiquetas
