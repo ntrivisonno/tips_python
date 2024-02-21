@@ -1687,6 +1687,17 @@ atributos_filtrados = [nombre for nombre in atributos if not nombre.startswith('
 print("Métodos filtrados:", metodos_filtrados)
 print("Atributos filtrados:", atributos_filtrados)
 
+** indicar info, doc de una clase
+   para documentar una clase y sus respectivos métodos, hay que colocar triple comillas a modo
+   de comentario, y lluego se accede como un atributo denominado doc con dunder
+*** ej:
+class OpenFOAM:
+    """
+    Read results of OpenFOAM simulation and store it in the instance as a dictionary.
+    Metohds: read_results, filter_results, plot_results.
+    """
+
+#$print(OpenFOAM.__doc__)
 * otro
 ** matlab2python cheatsheet
    http://mathesaurus.sourceforge.net/matlab-numpy.html
