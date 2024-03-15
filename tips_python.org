@@ -212,7 +212,7 @@
     print(euler.__doc__) #show docstring of the function,method or attribute
 ** data
 **** objeto
-     f = open(filename, mode)
+     f = open(filename, mode, encoding=None)
      ‘r’, este es el modo predeterminado, que abre un archivo para leer
      ‘w’, este modo abre un archivo para escritura, si el archivo no existe, crea un nuevo archivo.
      ‘a’, abre un archivo en modo anexar, agrega datos al final del archivo. Si el archivo no existe, crea un nuevo archivo.
@@ -220,6 +220,7 @@
      ‘r +’, abre un archivo (no crear) para leer y escribir.
      ‘w +’, abre o crea un archivo para escribir y leer, descarta el contenido existente.
      ‘a +’, abre o crea un archivo para leer y escribir, y agrega datos al final del archivo.
+     encoding="utf-8". Because UTF-8 is the modern de-facto standard. encodeing='b', binary
 *** leer data
 **** numpy
     # example by lucas
@@ -293,6 +294,67 @@
      dic.update({'Edades' : [4, 5, 6]})
 *** incorporar un valor a clave ya existente
     ver
+*** métodos populares
+**** clear
+     method that removes all the items for the dict
+
+     mydict = {'name': 'Nico', 'age': 35}
+     mydict.clear()
+     print(mydict)
+**** copy
+     method that returns a shallow copy of the dict
+
+     mydict = {'name': 'Nico', 'age': 35}
+     mynewdict = mydic.copy()
+     newdict['age'] = 30
+     print(mydic)
+     print(mynewdic)
+**** get
+**** items
+     method returns a list of key-values pairs in dict
+     basically retuns everything of the dict (key+values)
+     
+     mydict = {'name': 'Nico', 'age': 35}
+     items = mydic.items()
+     print(items)
+**** keys
+     method returns a list of the keys in the dict
+     
+     mydict = {'name': 'Nico', 'age': 35}
+     key = mydict.keys()
+     print(keys)
+**** popitem
+**** values
+     method retuns a list of values in the dict
+     just returns values, not key of the dict
+
+     mydict = {'name': 'Nico', 'age': 35}
+     values = mydict.values()
+     print(values)
+**** pop
+     method taht removes and return value of the specific key.
+     if the key doesn't exist, it raise a keyError. To avoid it,
+     you cna pass a default value to avoid the error
+
+     mydict = {'name': 'Nico', 'age': 35}
+     age = mydict.pop('age')
+     print(age) #value que eliminió
+     print(mydict) #resu del dict
+**** update
+     method updates the dict with the specified key-values pairs
+     
+     mydict = {'name': 'Nico', 'age': 35, 'country': 'Arg'}
+     mydict.update('age': 25)
+     print(mydict)
+**** setdefault
+     method returns the value of a specified key
+     no termino de entender su aplicación
+
+     mydict = {'name': 'Nico', 'age': 35}
+     country = mydict
+     setdefault('country', 'Arg')
+     print(country)
+     print(mydict)
 ** enumerate
 *** ex1 - base 1
    # use python3
