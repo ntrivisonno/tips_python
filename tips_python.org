@@ -716,16 +716,46 @@ with open(ruta_csv, 'w', newline='') as archivo_csv:
     for paso_tiempo in pasos_de_tiempo:
         escritor_csv.writerow([paso_tiempo])
 *** para ver el dicrectorio actual y cambiarlo
+    obtener el directorio actual e ir una folder p atrás relativa
 **** ej
-     import os
-     # cwd: current working directory
-     current_directory = os.getcwd()
-     print(current_directory)
-     
-     os.chdir('../')
-     
-     print(f'New directory: {os.getcwd()}')
-     
+import os
+import sys
+
+# Obtener el directorio actual
+current_directory = os.getcwd()
+
+# Ir una carpeta hacia atrás
+parent_directory = os.path.dirname(current_directory)
+
+# Agregar la ruta de la carpeta anterior al sys.path
+sys.path.append(parent_directory)
+
+# Verificar si la ruta se ha agregado correctamente
+print("Ruta agregada al sys.path:", parent_directory)
+
+**** ir folder para atrás de forma recursiva
+import os
+import sys
+
+def add_parent_directories(num_levels):
+    # Obtenemos el directorio actual
+    current_directory = os.getcwd()
+
+    # Retrocedemos num_levels veces
+    for _ in range(num_levels):
+        current_directory = os.path.dirname(current_directory)
+
+    # Agregamos la ruta de la carpeta anterior al sys.path
+    sys.path.append(current_directory)
+
+    # Mostramos la ruta agregada al sys.path
+    print(f"Ruta agregada al sys.path: {current_directory}")
+
+# Número de niveles que queremos retroceder
+num_levels_back = 2  # Cambia a la cantidad deseada de niveles
+
+# Llamamos a la función para agregar los directorios
+add_parent_directories(num_levels_back)
 ** pdf
 *** unir dos pdf
 **** ej
