@@ -1444,7 +1444,7 @@ import seaborn as sns
 
 fileName = 'pepe.txt'
 # Read data
-data = pd.readcsv(fileName)
+data = pd.read_csv(fileName)
 
 # Displays first fewRows
 print(data.head())
