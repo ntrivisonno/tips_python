@@ -1257,6 +1257,39 @@ df.notna()
 Aplica una función a lo largo de un eje del DataFrame.
 ***** ej
 df['Columna'].apply(funcion)
+**** asof
+     The asof() function in Pandas is used to select the most recent
+     value that is less than or equal to the given value with 
+     example in pandas
+***** ej
+'''
+The asof() function in Pandas is used to select the most recent value that is less than or equal to the given value with example in pandas
+'''
+import pandas as pd #This line imports the Pandas library and aliases it as pd for ease of use.
+
+data = {'Date': ['2024-02-10', '2024-02-11', '2024-02-12', '2024-02-13', '2024-02-14'], 'Price': [100.0, 102.5, 99.8, 101.2, 103.0]} #This line creates a dictionary called data containing two keys: 'Date' and 'Price'. Each key corresponds to a list of values representing dates and prices, respectively.
+
+df = pd.DataFrame(data) #This line creates a Pandas DataFrame called df from the data dictionary.
+
+df['Date'] = pd.to_datetime(df['Date']) #This line converts the 'Date' column of the DataFrame df to datetime format using the pd.to_datetime() function.
+df.set_index('Date', inplace=True) #This line sets the 'Date' column as the index of the DataFrame df using the set_index() function. The inplace=True parameter ensures that the changes are made to the DataFrame df in place.
+
+df.sort_index(inplace=True) #This line sorts the DataFrame df based on its index (which is now the 'Date' column) in ascending order using the sort_index() function. The inplace=True parameter ensures that the changes are made to the DataFrame df in place.
+
+print("Original DataFrame:"),print(df) #This line prints a message "Original DataFrame:" followed by the DataFrame df.
+
+selected_date = pd.to_datetime('2024-02-13') #This line converts the string '2024-02-13' to a Pandas Timestamp object representing the selected date.
+
+asof_result = df.asof(selected_date) #This line uses the asof() function to select the most recent row in the DataFrame df with an index less than or equal to the selected_date, and assigns the result to the variable asof_result.
+
+print("\nUsing asof() function:") #This line prints a message indicating the use of the asof() function.
+
+print(f"Closest date to {selected_date.date()} with available data:\n{asof_result}") #This line prints the closest date to the selected_date with available data, along with the corresponding row from the DataFrame df as determined by the asof() function. The f-string formatting is used to include the selected date and result in the output message.
+
+
+print('#--------------------------------------------')
+print('\n FIN, OK!')
+      
 **** pivot_table()
 Crea una tabla dinámica a partir de un DataFrame.
 ***** ej
