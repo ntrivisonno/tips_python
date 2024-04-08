@@ -262,6 +262,50 @@
      f = open('test.txt', 'a')
      f.write(f"Agrego una linea mas\n")
      f.close()
+** desempaquetar dependencias
+   La desempaquetación con * es necesaria si tienes una lista de 
+   longitud variable y quieres pasar sus elementos como argumentos
+   individuales a la función.
+*** ej lista
+# Le estamos pasando una lista de 4 componentes, pero en realidad, 
+# le estamos pasando un sólo argumento, que es una lista
+def sum(a,b,c,d):
+    sum = a+b+c+d
+    print(f'Sum: {sum}')
+    #return sum
+
+a = [1,2,3,4]
+sum(*a)    
+
+*** ej dictionaries
+def sum(a,b,c,d):
+    sum = a+b+c+d
+    print(f'Sum: {sum}')
+    #return sum
+
+dict = {'a':1,'b':2,'c':3,'d':4}
+sum(**dict)    
+# tmb se puede usar el método items de la class dict
+# el método items, separa en tuplas las keys con sus respectivos
+# valores
+dict = {'a':1,'b':2,'c':3,'d':4}
+def sum(a,b,c,d):
+    sum = a+b+c+d
+    print(f'Sum: {sum}')
+    #return sum
+claves = []
+valores = []
+
+# Utilizando un bucle para iterar sobre los elementos del diccionario
+# y desempaquetarlos en las listas claves y valores
+for clave, valor in dict.items():
+    claves.append(clave)
+    valores.append(valor)
+
+print(f'claves:{claves}')  # ['a', 'b', 'c']
+print(f'valores:{valores}')  # [1, 2, 3]
+
+sum(*valores)
 ** dhf5
 *** read 
     import h5py
@@ -311,9 +355,11 @@
      print(mynewdic)
 **** get
 **** items
-     method returns a list of key-values pairs in dict
-     basically retuns everything of the dict (key+values)
-     
+     method returns an object del tipo dic_items() that is a view of
+     the pair key-vales of the dic. 
+     en realidad no devuelve ni una lista ni una tupla, sino un objeto
+     iterable de los pares clave-valor
+    
      mydict = {'name': 'Nico', 'age': 35}
      items = mydic.items()
      print(items)
@@ -1124,6 +1170,9 @@ cv.close()
     print("La moda: {} ".format(moda))
     
 ** strings
+   help(str.method)
+   $help(str.split)
+*** most usefull methods
 *** replace   
     reemplazar espacios/x por otro caracter
 **** ej:
