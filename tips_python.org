@@ -846,11 +846,30 @@ unir_pdfs(archivo1, archivo2, archivo_salida)
     cv = Converter(pdf_file)
     cv.convert(word_file)
 cv.close()
-** plot
+** plot/figures
    si hay varios plots y queremos que se muestren todos a lo último, 
    podemos hacer un plt.show() a lo último, o en cada plt.show() poner:
    plt.plot(block=False)
-*** plotea dos plot en una sola graf
+
+   tmb hay un módulo que simula un ploteo a mano alzada
+   plt.xkcd() #activate hand-draw mode
+*** plot mano alzada / draft
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    plt.close('all')
+    x = np.linspace(0,10,20)
+    y = np.sin(x)
+    plt.figure();plt.xkcd();plt.plot(x,y);plt.title('Mano Alzada')
+    # Restablecer los estilos predeterminados
+    plt.rcdefaults()
+    plt.figure();plt.plot(x,y);plt.title('Plot Standard')
+
+    print('#--------------------------------------------')
+    print('\n FIN, OK!')
+
+    plt.show()
+*** [#B] plotea dos plot en una sola graf
 **** ej
      import numpy as np
      import matplotlib.pyplot as plt
