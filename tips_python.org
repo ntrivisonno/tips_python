@@ -1264,7 +1264,7 @@ else:
    pandas library se usa muchas veces para reemplazar a SQL
 *** métodos populares de pandas
 sea df el dataFrame:
-df = pd.dataFrame(tabla,csv,etc)
+df = pd.DataFrame(tabla,csv,etc)
 **** head() y tail():
 Descripción: Muestra las primeras o últimas filas del DataFrame.
 ***** ej
@@ -1362,6 +1362,30 @@ print('\n FIN, OK!')
 Crea una tabla dinámica a partir de un DataFrame.
 ***** ej
 pd.pivot_table(df, values='Valor', index='Index', columns='Columna', aggfunc='mean')
+**** plotear valores
+# crear funciones para solamente pasar names tipo argumentos
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Acceso a los datos con MultiIndex
+def get_data(df, angle, position, variable):
+    return df.loc[:, (angle, position, variable)]
+
+# Función para plotear los datos
+def plot_data(df, angle, position, x_var, y_var):
+    x = get_data(df, angle, position, x_var)
+    y = get_data(df, angle, position, y_var)
+    plt.figure(figsize=(10, 6))
+    plt.plot(x, y, marker='o')
+    plt.xlabel(x_var)
+    plt.ylabel(y_var)
+    plt.title(f'{angle} - {position}')
+    plt.grid(True)
+    plt.show()
+
+# Ejemplo de uso
+# df.info() # para ver un resúmen
+plot_data(df, '1.09deg', 'Upper', 'x/c', 'cp')
 *** arreglos - series - listas_en_pandas
     En pandas, una Serie es una estructura de datos unidimensional 
     similar a un arreglo o una lista en Python, pero con etiquetas
@@ -1826,6 +1850,21 @@ with open('puntos_ob.csv', 'w', newline='') as csvfile:
     la función zip, retorna un objeto zip, que es un iterador de tuplas
     donde los primeros valores de cada tupla se pasan juntos, y asi
     sucesivamente
+*** zip listas
+    para mergear dos listas y luego imprimir sus valores, x ejem para
+    hacer un *.csv file
+    
+    for x,u in zip(xucp,ucp):
+         print(f'{x},{u}')
+**** ej
+     
+    xucp = [0.01192731, 0.01257203, 0.02750803, 0.03083908, 0.05663457, 0.08112718, 0.10547877, 0.13480007, 0.15652577, 0.20708923, 0.30833703, 0.40536729, 0.50601066, 0.61036118, 0.70970168, 0.80912278, 0.90699923, 1.00738069]
+    ucp = [0.36710051, 0.1968946, -0.07954225, -0.29227277, -0.43561537, -0.56833353, -0.66381916, -0.73797531, -0.80689312, -0.82231266, -0.88506534, -0.50105438, -0.40423903, -0.28610764, -0.17866785, -0.09250379, 0.06811191, 0.23407342]
+
+     for x,u in zip(xucp,ucp):
+         print(f'{x},{u}')
+
+
 *** zip, mershear dos tuplas
 **** ej
      a1 = ("John", "Charles", "Mike", "Nico")
