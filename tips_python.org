@@ -11,9 +11,13 @@
    
    script for bifurcation diagram or logistic map
    """
+   import time
+   tStart = time.time()
 *** end prog
+   endTime = time.time()
+   elapse = endTime - start
    print('#--------------------------------------------')
-   print('\n FIN, OK!')
+   print(f'FIN, OK! - time = {elapse}')
 
    plt.show()
 ** assert
