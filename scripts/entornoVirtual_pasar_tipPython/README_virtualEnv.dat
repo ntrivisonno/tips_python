@@ -1,0 +1,15 @@
+# To execute a python script with virtualEnv
+# load Python2.7 or Python3 module in cluster/CPU que contenga al paquete virtualenv. Pirayú Python/2.7.15, 
+# IMP: latex font should have being installed previously as sudo
+
+$virtualenv --python=python2.7 virtualEnv
+$source ./virtualEnv/bin/activate
+# Now you are located in virtualEnv
+~/virtualEnv$pip install -U pip
+~/virtualEnv$ pip install -r requirements.txt
+
+(work in virtualEnv)
+
+# To exit virtualEnv
+$deactivate
+$rm -r virtualEnv

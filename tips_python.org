@@ -1,3 +1,23 @@
+* conceptos
+** castear vs parsear
+   castear: (viene de fundición, moldear. Toma un valor y lo trata como si 
+   fuera de otro tipo)
+
+   parsear: significa analizar y descomponer. Toma una cadena de texto (o
+   datos en gral) para convertirla en una estructura que el programa pueda
+   entender y manipular fácilmente.
+   Un parser o analizador sintáctico es un componente de software que lee
+   una entrada (como un archivo de texto, código fuente, JSON, XML, etc.)
+   y la transforma en una estructura de datos (como árboles, listas, 
+   objetos, etc.).
+*** ej
+# Castear
+x = 5.7
+y = int(x)  # castea el float 5.7 a entero -> 5 (pierde decimales)
+
+# Parsear
+texto = "123"
+numero = int(texto)  # parsea el string "123" a entero -> 123
 * functions
 ** charact prog
    python es:
@@ -575,7 +595,26 @@ sum(*valores)
     [('apple', 'red'), ('apple', 'yellow'), ('apple', 'red'), ('banana', 'red'),....
     ....('banana', 'yellow'), ('banana', 'red'), ('cherry', 'red'),..
     ....('cherry', 'yellow'), ('cherry', 'red')]
+    # ej5 encontrar un valor cercano en un arreglo
+    # Define tolerance
+    tolerance = 0.01
+    
+    # Find indices of values within the range [0.52 - tol, 0.52 + tol]
+    indices = [i for i, j in enumerate(y) if abs(j - 0.52) <= tolerance]
+    print("Indices:", indices)
+    print("Values:", [y[i] for i in indices])
+    
+    # ej6 idem ej5, pero con el metodo isclose de numpy
+    import numpy as np
 
+    # Example array
+    y = np.array([0.49, 0.50, 0.51, 0.52, 0.53])
+    
+    # Find indices of values close to 0.52
+    indices = np.where(np.isclose(y, 0.52, atol=1e-2))  # Tolerance of 0.01
+    print("Indices:", indices[0])
+    print("Values:", y[indices])
+    
 ** file
    file handling
    pythong has several methods (functions) for handling files
@@ -867,13 +906,14 @@ cv.close()
     plt.figure();plt.xkcd();plt.plot(x,y);plt.title('Mano Alzada')
     # Restablecer los estilos predeterminados
     plt.rcdefaults()
+    plt.ylim(0, 10)
     plt.figure();plt.plot(x,y);plt.title('Plot Standard')
 
     print('#--------------------------------------------')
     print('\n FIN, OK!')
 
     plt.show()
-*** [#B] plotea dos plot en una sola graf
+*** plotea dos plot en una sola graf
 **** ej
      import numpy as np
      import matplotlib.pyplot as plt
@@ -1066,6 +1106,9 @@ cv.close()
 **** save figure
      dir = '~/Documents/CIMEC/popurri/'
      plt.savefig(dir+'plas.png',dpi=200)
+     
+     # save figure as pdf
+     plt.savefig(dir+'tabla_mach.pdf');plt.show()
 ** presione enter
    comando para que para continuar se debe presionar la tecla enter
 
@@ -1652,6 +1695,39 @@ with open('puntos_ob.csv', 'w', newline='') as csvfile:
      data = pd.read_csv('./Forces_proc.txt', skiprows = 6, skipinitialspace=True)
      # columnas, guardamos en una lista
      cols = list(data.columns) 
+*** plot and read files in *.csv
+**** ej
+idem anterior pero a los valores salvo el orig lo multiplico por (-1)
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Lista de archivos y etiquetas correspondientes
+file_labels = [
+    ('cpset6_Lower.csv', 'Lower', True),   # True indica que se multiplica por -1
+    ('cpset6_Upper.csv', 'Upper', True),   # True indica que se multiplica por -1
+    ('cpset6_Orig.csv', 'Orig', False)     # False para dejar los datos como están
+]
+
+# Recorrer la lista de archivos
+for filename, label, multiply in file_labels:
+    data = pd.read_csv(filename, skiprows=1)
+    
+    # Multiplicar por -1 si es necesario
+    if multiply:
+        data.iloc[:, 1] = data.iloc[:, 1] * -1
+    
+    # Graficar los datos
+    plt.plot(data.iloc[:, 0], data.iloc[:, 1], 'o', label=label)
+
+# Etiquetas y leyenda
+plt.xlabel('X Label')
+plt.ylabel('Y Label')
+plt.legend()
+
+print('#--------------------------------------------')
+print(f'FIN, OK! ')
+# Mostrar el gráfico
+plt.show()
 *** orden columnas segun criterio
 **** ex
      import pandas as pd
@@ -1674,6 +1750,7 @@ with open('puntos_ob.csv', 'w', newline='') as csvfile:
      # Mostrar el DataFrame resultante
      print(df_ordenado)
 
+*** plot with pandas
 *** ex1 pandas
     # script that estimates the standard coef from a flight
     import pandas as pd
