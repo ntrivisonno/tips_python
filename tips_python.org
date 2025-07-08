@@ -1,4 +1,9 @@
 * conceptos
+** charact prog
+   python es:
+   -dinámico: no se comprueban los tipos de datos. De hecho se checkean los tipos a medida que se van
+   generando
+   -interpretado: se omite el proceso de compilación, ejecución y depuración
 ** castear vs parsear
    castear: (viene de fundición, moldear. Toma un valor y lo trata como si 
    fuera de otro tipo)
@@ -18,12 +23,51 @@ y = int(x)  # castea el float 5.7 a entero -> 5 (pierde decimales)
 # Parsear
 texto = "123"
 numero = int(texto)  # parsea el string "123" a entero -> 123
+** desempaquetar dependencias
+   La desempaquetación con * es necesaria si tienes una lista de 
+   longitud variable y quieres pasar sus elementos como argumentos
+   individuales a la función.
+*** ej lista
+# Le estamos pasando una lista de 4 componentes, pero en realidad, 
+# le estamos pasando un sólo argumento, que es una lista
+def sum(a,b,c,d):
+    sum = a+b+c+d
+    print(f'Sum: {sum}')
+    #return sum
+
+a = [1,2,3,4]
+sum(*a)    
+
+*** ej dictionaries
+def sum(a,b,c,d):
+    sum = a+b+c+d
+    print(f'Sum: {sum}')
+    #return sum
+
+dict = {'a':1,'b':2,'c':3,'d':4}
+sum(**dict)    
+# tmb se puede usar el método items de la class dict
+# el método items, separa en tuplas las keys con sus respectivos
+# valores
+dict = {'a':1,'b':2,'c':3,'d':4}
+def sum(a,b,c,d):
+    sum = a+b+c+d
+    print(f'Sum: {sum}')
+    #return sum
+claves = []
+valores = []
+
+# Utilizando un bucle para iterar sobre los elementos del diccionario
+# y desempaquetarlos en las listas claves y valores
+for clave, valor in dict.items():
+    claves.append(clave)
+    valores.append(valor)
+
+print(f'claves:{claves}')  # ['a', 'b', 'c']
+print(f'valores:{valores}')  # [1, 2, 3]
+
+sum(*valores)
 * functions
-** charact prog
-   python es:
-   -dinámico: no se comprueban los tipos de datos. De hecho se checkean los tipos a medida que se van
-   generando
-   -interpretado: se omite el proceso de compilación, ejecución y depuración
 ** encabezado
 *** begin prog
    """
@@ -35,7 +79,7 @@ numero = int(texto)  # parsea el string "123" a entero -> 123
    tStart = time.time()
 *** end prog
    endTime = time.time()
-   elapse = endTime - start
+   elapse = endTime - tStart
    print('#--------------------------------------------')
    print(f'FIN, OK! - time = {elapse}')
 
@@ -286,50 +330,28 @@ numero = int(texto)  # parsea el string "123" a entero -> 123
      f = open('test.txt', 'a')
      f.write(f"Agrego una linea mas\n")
      f.close()
-** desempaquetar dependencias
-   La desempaquetación con * es necesaria si tienes una lista de 
-   longitud variable y quieres pasar sus elementos como argumentos
-   individuales a la función.
-*** ej lista
-# Le estamos pasando una lista de 4 componentes, pero en realidad, 
-# le estamos pasando un sólo argumento, que es una lista
-def sum(a,b,c,d):
-    sum = a+b+c+d
-    print(f'Sum: {sum}')
-    #return sum
-
-a = [1,2,3,4]
-sum(*a)    
-
-*** ej dictionaries
-def sum(a,b,c,d):
-    sum = a+b+c+d
-    print(f'Sum: {sum}')
-    #return sum
-
-dict = {'a':1,'b':2,'c':3,'d':4}
-sum(**dict)    
-# tmb se puede usar el método items de la class dict
-# el método items, separa en tuplas las keys con sus respectivos
-# valores
-dict = {'a':1,'b':2,'c':3,'d':4}
-def sum(a,b,c,d):
-    sum = a+b+c+d
-    print(f'Sum: {sum}')
-    #return sum
-claves = []
-valores = []
-
-# Utilizando un bucle para iterar sobre los elementos del diccionario
-# y desempaquetarlos en las listas claves y valores
-for clave, valor in dict.items():
-    claves.append(clave)
-    valores.append(valor)
-
-print(f'claves:{claves}')  # ['a', 'b', 'c']
-print(f'valores:{valores}')  # [1, 2, 3]
-
-sum(*valores)
+** debug
+   para debug se puede usar pdb o embed() o una ide
+   - pdb: se usa next, step, print, etc
+   - embed: necesita de ipython
+   - logging: ver mejor
+*** pdb
+	import pdb 
+	# donde quiero hacer un breakpoint
+	pdb.set_trace()
+	
+	usar:
+	n: next
+	c: continue
+	s: step, entra a la función
+	l: lista el código fuente alrededor
+	p var: print var, imprime el valor de "var"
+	q: quit, sale del debug
+*** embed
+	from IPython import embed
+	# donde quiero hacer un breakpoint
+	embed()
+	· luego abre una consola de ipython
 ** dhf5
 *** read 
     import h5py
