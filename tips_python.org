@@ -131,6 +131,7 @@ sum(*valores)
 
      #Entra en except, ha ocurrido una excepción
      #Entra en finally, se ejecuta el bloque finally
+
 ** arrays/vectores
 *** row vs column vector
     import numpy as np
@@ -244,6 +245,48 @@ sum(*valores)
    >>> a.append(b)
    >>> a
    [0, 1, 2, 3, 55, [9, 9]]
+** args parsers
+# ¿Qué es parser = argparse.ArgumentParser(...)?
+
+# Ahí estás creando un objeto de la clase ArgumentParser. Esa línea:
+
+parser = argparse.ArgumentParser(description="...")
+
+# es equivalente a:
+
+from argparse import ArgumentParser
+parser = ArgumentParser(description="...")
+
+# Así que ArgumentParser() es el constructor, y parser es la instancia.
+
+# Luego se le dice al parser que argumentos se deben crear, sean
+# posicionales o con banderas (--algo)
+parser.add_argument('config_path', ...)
+parser.add_argument('--debug', ...)
+# Finalmente hacés:
+args = parser.parse_args()
+# Y eso lee sys.argv, interpreta lo que escribiste en la terminal, 
+# y devuelve un objeto 
+# Namespace(description='...', config_path='...', debug=True)
+# Ese Namespace se comporta como un objeto con atributos:
+# args.config_path
+# args.debug
+*** ej
+import argparse
+
+# Paso 1: crear el parser
+parser = argparse.ArgumentParser()
+
+# Paso 2: definir qué argumentos esperar
+parser.add_argument("archivo")        # posicional
+parser.add_argument("--verbose")      # opcional
+
+# Paso 3: parsear lo que venga de la terminal
+args = parser.parse_args()
+
+# Paso 4: usarlo como objeto
+print(args.archivo)
+print(args.verbose)
 ** cambios de ',' por '.' para los flotantes
 *** ex
     # script cambia , por .
@@ -1934,6 +1977,12 @@ plt.show()
 
 ** varios
 *** agregar
+** vars
+   Función standard que devuelve el __dict__ de un objeto
+   # a cualquier objeto aplicarle vars(objeto)
+   ej: objeto args de un parser
+   args = parser.parser_args()
+   dic1 = vars(args) # crea el diccionario del objeto
 ** warnings
 *** error np.arrays length
     when facing with arrays with different length, there would be an error. To Face
