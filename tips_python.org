@@ -1247,6 +1247,40 @@ cv.close()
     dunder, es una expresion para abreviar "double underscore", ej:
     dunder bazz: __baz
     dunder baz dunder:  __baz__ (creo q el 'ultimo dunder se omite)
+** unicode
+*** ASCI, american standard code for internationalinterchange
+   usa 7 bits → 128 caracteres.
+
+   Incluye:
+
+   Letras A-Z, a-z
+   Dígitos 0-9
+   Símbolos y caracteres de control (\n, \t)
+
+**** eg:
+   char = 'A'
+   print(ord(char))  # Convierte a entero decimal → 65
+   print(hex(ord(char)))  # Convierte a hexadecimal → 0x41
+   
+*** UNICODE
+   Unicode extiende ASCII para soportar todos los caracteres del mundo, emojis,
+   símbolos matemáticos, etc. Se plantea para un almacenaje de 21 bits.
+
+   Cada carácter tiene un punto de código: U+0000 hasta U+10FFFF.
+
+   Python maneja Unicode con chr() y ord().
+**** eg:
+code = 0x1F9E0  # hexadecimal
+char = chr(code)  # convierte a Unicode
+print(char)       # 🧠 emogy cerebro
+
+brain_hexa = '1F9E0'
+brain_int = int(brain_hexa, 16)  # 129504
+emojic = chr(brain_int)
+print(f"Decimal: {brain_int}, Unicode: U+{brain_int:04X}, Char: {emojic}")
+
+
+
 ** random
    generate a vector with random numbers
 *** ex
