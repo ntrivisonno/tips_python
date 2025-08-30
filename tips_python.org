@@ -1279,6 +1279,23 @@ brain_int = int(brain_hexa, 16)  # 129504
 emojic = chr(brain_int)
 print(f"Decimal: {brain_int}, Unicode: U+{brain_int:04X}, Char: {emojic}")
 
+**** eg linkedIn
+
+🧠 R&D Engineer | 💻 CFD & Simulation
+
+🧠 Physics-based simulation expert | CFD, Multiphysics & thermal systems | OpenFOAM
+💻 Python/C++ | Numerical modeling | Advanced software development | Optimization
+💡 Bridging rigorous scientific research with practical, results-driven solutions for industry
+🎯 Committed to reliability, performance, and efficiency
+
+Anterior expresando los emojis en hexadecimales
+
+&#129504; R&D Engineer | &#128187; CFD & Simulation
+
+&#129504; Physics-based simulation expert | CFD, Multiphysics & thermal systems | OpenFOAM
+&#128187; Python/C++ | Numerical modeling | Advanced software development | Optimization
+&#128161; Bridging rigorous scientific research with practical, results-driven solutions for industry
+&#127919; Committed to reliability, performance, and efficiency
 
 
 ** random
